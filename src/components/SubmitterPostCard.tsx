@@ -6,7 +6,7 @@ function SubmitterPostCard() {
   return (
     <>
       <div
-        className="flex border-b border-white/30 pbx-3 justify-between p-4"
+        className="hidden md:flex border-b border-white/30 pbx-3 justify-between p-4"
         onClick={() => openSubmitPost()}
       >
         <div className="flex items-center">
@@ -18,7 +18,7 @@ function SubmitterPostCard() {
         </div>
         <div className="flex flex-1">
           <input
-            className="placeholder:text-md focus:outline-none"
+            className="placeholder:text-sm focus:outline-none"
             readOnly
             placeholder="¿Qué hay de nuevo?"
           />

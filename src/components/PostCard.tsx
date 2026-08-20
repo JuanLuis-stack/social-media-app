@@ -42,7 +42,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
   }
 
   return (
-    <div className="flex border-b border-white/30 px-4 my-3">
+    <div className="flex border-b border-white/20 px-4 my-3">
       <img
         src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
         alt=""
@@ -55,7 +55,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
         </header>
         <div>
           <p className="font-semibold text-md text-white">{post.title}</p>
-          <p className="font-light">{post.content}</p>
+          <p className="font-light text-sm text-white">{post.content}</p>
         </div>
 
         {post.media_url &&
@@ -95,7 +95,8 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
                 }
               ></path>
             </svg>
-            Me gusta {post.likes}
+            <p className="hidden md:block ml-1"> Me gustas</p>
+            {post.likes}
           </button>
           <button
             id={`comment-${post.id}-Btn`}
@@ -116,7 +117,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
             >
               <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10h9c.37 0 .71-.21.89-.54.17-.33.15-.73-.06-1.03l-1.75-2.53a10 10 0 0 0 1.93-5.9c0-5.51-4.49-10-10-10Zm6 16.43L19.09 20H12c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8c0 1.91-.69 3.75-1.93 5.21-.3.34-.32.85-.06 1.22Z"></path>
             </svg>
-            Comentar {post.comments}
+            <p className="hidden md:block ml-1">Comentar</p> {post.comments}
           </button>
         </div>
       </div>

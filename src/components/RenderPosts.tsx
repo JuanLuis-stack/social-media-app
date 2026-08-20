@@ -13,7 +13,7 @@ function RenderPosts() {
   const [seletedPost, setSeletedPost] = useState<Post | null>(null);
 
   return (
-    <div className="flex-1 overflow-y-auto h-full custom-scrollbar rounded-t-3xl border border-white/35">
+    <div className="flex-1 w-fit mt-13 md:mt-2 overflow-y-auto h-full custom-scrollbar md:rounded-t-3xl md:border border-white/35">
       {seletedPost && (
         <CommentCard
           post={seletedPost}
