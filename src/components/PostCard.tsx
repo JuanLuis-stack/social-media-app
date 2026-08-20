@@ -117,7 +117,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
             >
               <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10h9c.37 0 .71-.21.89-.54.17-.33.15-.73-.06-1.03l-1.75-2.53a10 10 0 0 0 1.93-5.9c0-5.51-4.49-10-10-10Zm6 16.43L19.09 20H12c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8c0 1.91-.69 3.75-1.93 5.21-.3.34-.32.85-.06 1.22Z"></path>
             </svg>
-            <p className="hidden md:block ml-1">Comentar</p> {post.comments}
+            <p className="hidden md:block px-1">Comentar</p> {post.comments}
           </button>
         </div>
       </div>

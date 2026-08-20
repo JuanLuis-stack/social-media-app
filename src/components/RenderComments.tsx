@@ -8,8 +8,11 @@ function RenderComments({ comments }: CommentsProp) {
     </p>
   ) : (
     comments.map((comment) => (
-      <li key={comment.id} className="bg-white/10 my-2 rounded-xl flex p-3">
-        <div className="w-10 mr-2">
+      <li
+        key={comment.id}
+        className="border-b border-[#444] md:border-none md:bg-white/6 my-2 md:rounded-xl flex p-3 md:p-3"
+      >
+        <div className="w-10">
           <img
             src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
             alt=""
