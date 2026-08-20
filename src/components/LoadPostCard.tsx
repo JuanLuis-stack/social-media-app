@@ -156,8 +156,8 @@ function LoadPostCard() {
 
   return (
     <Overlay closerFunction={closeSubmitPost}>
-      <div className="flex flex-col w-2/4 max-h-[85%] h-auto border rounded-2xl backdrop-blur-xl animate-[fadeIn_500ms_ease-out]">
-        <header className="flex justify-center relative border-b p-2">
+      <div className="flex w-full h-full flex-col px-5 py-2 md:p-0 bg-[#101010] z-10 md:w-2/4 md:max-h-[85%] md:h-auto md:border border-white/30 md:rounded-2xl md:bg-black/2 md:backdrop-blur-xl animate-[fadeIn_500ms_ease-out]">
+        <header className="flex justify-center relative md:border-b border-white/30 p-2 text-white pb-5">
           <button
             onClick={closeSubmitPost}
             className="absolute left-2 font-semibold cursor-pointer text-gray-400 hover:text-white rounded-md duration-150"
@@ -166,8 +166,8 @@ function LoadPostCard() {
           </button>
           <p className="font-bold">Nuevo Post</p>
         </header>
-        <div className="relative flex-1  mb-15 overflow-y-auto custom-scrollbar">
-          <div className="flex p-2">
+        <div className="relative flex-1 overflow-y-auto custom-scrollbar">
+          <div className="flex flex-1 p-2">
             <img
               src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
               alt=""
@@ -176,8 +176,8 @@ function LoadPostCard() {
             <p>{loggedUser?.user.email}</p>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className="flex justify-between px-2 py-2">
-              <label htmlFor="title" className="w-20 pr-2">
+            <div className="flex flex-col md:flex-row justify-between px-2 py-2">
+              <label htmlFor="title" className="w-20 pb-2 md:pr-2">
                 Titulo:
               </label>
               <textarea
@@ -192,8 +192,8 @@ function LoadPostCard() {
                 className={textareaStyle}
               ></textarea>
             </div>
-            <div className="flex justify-between px-2">
-              <label htmlFor="content" className="w-20 pr-1">
+            <div className="flex flex-col md:flex-row justify-between px-2">
+              <label htmlFor="content" className="w-20 pb-2 md:pr-1">
                 contexto:
               </label>
               <textarea
@@ -214,7 +214,7 @@ function LoadPostCard() {
             className="hidden"
             type="file"
           />
-          <div className="flex justify-end mr-2">
+          <div className="flex justify-end mr-2 ">
             <svg
               id="imgIcon"
               xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +273,7 @@ function LoadPostCard() {
           )}
         </div>
 
-        <footer className="flex justify-between p-2 h-13 absolute bottom-0 w-full">
+        <footer className="flex justify-between p-2 h-13 w-full">
           <p
             className={`font-semiold ${error ? "text-red-500" : "text-transparent"} duration-500`}
           >
@@ -285,7 +285,7 @@ function LoadPostCard() {
               handleSubmit(e);
               activeAnimation("submitPost");
             }}
-            className={`bg-black/50 border-[1.5px] border-white/25 cursor-pointer duration-150 rounded-md p-1 
+            className={`bg-[#777] hover:bg-[#eee] md:hover:bg text-black/60 md:bg-black/10 md:hover:bg-black/30 md:text-white md:border-[1.5px] md:border-white/25 cursor-pointer duration-150 rounded-2xl px-2 p-1 
             ${animate === "submitPost" && "animate-[spanIn_400ms_ease]"}`}
           >
             Publicar
