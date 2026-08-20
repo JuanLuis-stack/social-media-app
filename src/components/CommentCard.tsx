@@ -49,8 +49,8 @@ function CommentCard({ post, setPosts, onCloseComments }: CommentCardProps) {
   return (
     <Overlay closerFunction={onCloseComments}>
       {
-        <div className="w-2/3 h-2/3 backdrop-blur-xs border relative z-10 rounded-2xl flex flex-col animate-[fadeIn_500ms_ease-out]">
-          <header className="flex justify-around p-3 border-b h-11 relative bg-black/45">
+        <div className="bg-[#101010] md:bg-transparent w-screen h-[92%] md:w-2/3 md:h-2/3 md:backdrop-blur-md absolute md:relative top-0 z-10 md:border md:border-white/30 md:rounded-3xl overflow-hidden flex flex-col animate-[fadeIn_500ms_ease-out]">
+          <header className="flex justify-around p-3 md:border-b h-11 relative backdrop-blur-2xl md:bg-black/45">
             <button
               onClick={onCloseComments}
               className="absolute left-3 cursor-pointer hover:opacity-55 duration-300"
