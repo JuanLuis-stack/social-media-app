@@ -3,6 +3,7 @@
 import RenderPosts from "../components/RenderPosts";
 import SubmitterPostCard from "../components/SubmitterPostCard";
 import { UsePostContext } from "../context/PostContext";
+import ScrollerContainer from "../components/ScrollerContainer";
 
 function Home() {
   const { posts } = UsePostContext();
@@ -15,9 +16,11 @@ function Home() {
       <p className="hidden md:block pt-3 pl-2 font-semibold text-xl text-white cursor-pointer">
         Para ti
       </p>
-      <RenderPosts posts={posts}>
-        <SubmitterPostCard />
-      </RenderPosts>
+      <ScrollerContainer>
+        <RenderPosts posts={posts}>
+          <SubmitterPostCard />
+        </RenderPosts>
+      </ScrollerContainer>
     </div>
   );
 }

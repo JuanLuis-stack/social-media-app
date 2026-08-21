@@ -14,7 +14,7 @@ function RenderPosts({ posts, children }: RenderPostsType) {
   const [seletedPost, setSeletedPost] = useState<Post | null>(null);
 
   return (
-    <div className="flex-1 mt-13 md:mt-2 overflow-y-auto h-full w-full custom-scrollbar md:rounded-t-3xl md:border border-white/35">
+    <>
       {seletedPost && (
         <CommentCard
           post={seletedPost}
@@ -40,7 +40,7 @@ function RenderPosts({ posts, children }: RenderPostsType) {
           </>
         )}
       </ul>
-    </div>
+    </>
   );
 }
 
