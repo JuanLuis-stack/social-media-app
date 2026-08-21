@@ -7,6 +7,8 @@ import { renderCommentsSchema, type Comment } from "../Schemas/commentSchema";
 import { getComments } from "../services/postsService";
 import RenderComments from "./RenderComments";
 import Overlay from "./Overlay";
+import ImagePlayer from "./ImagePlayer";
+import VideoPlayer from "./VideoPlayer";
 
 type CommentCardProps = RenderPostType & {
   onCloseComments: () => void;
@@ -73,8 +75,21 @@ function CommentCard({ post, setPosts, onCloseComments }: CommentCardProps) {
               <h2 className="font-semibold text-md text-white">{post.title}</h2>
               <p className="font-light">{post.content}</p>
             </div>
+
+            {post.media_type && post.media_url && (
+              <div>
+                {post.media_type.startsWith("image") ? (
+                  <ImagePlayer post={post} />
+                ) : (
+                  <VideoPlayer
+                    videoUrl={post.media_url}
+                    videoType={post.media_type}
+                  ></VideoPlayer>
+                )}
+              </div>
+            )}
             {/* HERE IS WHERE THE IMAGE HAVE TO BE*/}
-            <ul className="mb-15">
+            <ul className="mb-20">
               <li className="font-bold">Comentarios:</li>
               <RenderComments comments={comments} />
             </ul>

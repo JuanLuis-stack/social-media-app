@@ -13,7 +13,7 @@ function RenderPosts() {
   const [seletedPost, setSeletedPost] = useState<Post | null>(null);
 
   return (
-    <div className="flex-1 w-fit mt-13 md:mt-2 overflow-y-auto h-full custom-scrollbar md:rounded-t-3xl md:border border-white/35">
+    <div className="flex-1 mt-13 md:mt-2 overflow-y-auto h-full w-full custom-scrollbar md:rounded-t-3xl md:border border-white/35">
       {seletedPost && (
         <CommentCard
           post={seletedPost}
@@ -21,7 +21,7 @@ function RenderPosts() {
           onCloseComments={() => setSeletedPost(null)}
         />
       )}
-      <ul className="h-full">
+      <ul className="h-full w-full">
         {!posts ? (
           <div className="w-full h-1/2 flex justify-center items-center">
             <p className="font-semibold">There are not posts sended...</p>
