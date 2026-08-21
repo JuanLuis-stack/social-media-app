@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import type { RenderPostType } from "../Schemas/postSchema";
+import type { RenderPostProps } from "../Schemas/postSchema";
 import setTimeAgo from "../utils/setTimeAgo";
 import SubmitterComment from "./SubmitterComment";
 import { renderCommentsSchema, type Comment } from "../Schemas/commentSchema";
@@ -9,12 +9,15 @@ import RenderComments from "./RenderComments";
 import Overlay from "./Overlay";
 import ImagePlayer from "./ImagePlayer";
 import VideoPlayer from "./VideoPlayer";
+import { UsePostContext } from "../context/PostContext";
 
-type CommentCardProps = RenderPostType & {
+type CommentCardProps = RenderPostProps & {
   onCloseComments: () => void;
 };
 
-function CommentCard({ post, setPosts, onCloseComments }: CommentCardProps) {
+function CommentCard({ post, onCloseComments }: CommentCardProps) {
+  const { setPosts } = UsePostContext();
+
   const [comments, setComments] = useState<Comment[]>([]);
   const { loggedUser } = useAuth();
 

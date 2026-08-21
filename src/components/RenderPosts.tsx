@@ -1,15 +1,16 @@
 // RenderPosts.tsx
 
-import { useState } from "react";
-import type { Post } from "../Schemas/postSchema";
+import React, { useState } from "react";
+import type { Post, Posts } from "../Schemas/postSchema";
 import PostCard from "./PostCard";
 import CommentCard from "./CommentCard";
-import SubmitterPostCard from "./SubmitterPostCard";
-import { UsePostContext } from "../context/PostContext";
 
-function RenderPosts() {
-  const { posts, setPosts } = UsePostContext();
+type RenderPostsType = {
+  posts: Posts | null;
+  children?: React.ReactNode;
+};
 
+function RenderPosts({ posts, children }: RenderPostsType) {
   const [seletedPost, setSeletedPost] = useState<Post | null>(null);
 
   return (
@@ -17,7 +18,6 @@ function RenderPosts() {
       {seletedPost && (
         <CommentCard
           post={seletedPost}
-          setPosts={setPosts}
           onCloseComments={() => setSeletedPost(null)}
         />
       )}
@@ -28,7 +28,8 @@ function RenderPosts() {
           </div>
         ) : (
           <>
-            <SubmitterPostCard />
+            {/* <SubmitterPostCard /> */}
+            {children}
             {posts.map((post) => (
               <PostCard
                 key={post.id}
