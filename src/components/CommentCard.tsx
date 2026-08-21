@@ -89,7 +89,7 @@ function CommentCard({ post, setPosts, onCloseComments }: CommentCardProps) {
               </div>
             )}
             {/* HERE IS WHERE THE IMAGE HAVE TO BE*/}
-            <ul className="mb-15">
+            <ul className="mb-20">
               <li className="font-bold">Comentarios:</li>
               <RenderComments comments={comments} />
             </ul>
