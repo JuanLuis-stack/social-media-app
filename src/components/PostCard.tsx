@@ -95,7 +95,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
                 }
               ></path>
             </svg>
-            <p className="hidden md:block ml-1"> Me gustas</p>
+            <p className="hidden md:block px-1"> Me gustas</p>
             {post.likes}
           </button>
           <button
