@@ -10,6 +10,7 @@ import VideoPlayer from "./VideoPlayer";
 import { UseAnimation } from "../context/AnimationContext";
 import ImagePlayer from "./ImagePlayer";
 import { UsePostContext } from "../context/PostContext";
+import { Link } from "react-router-dom";
 
 type RenderPostProps = {
   post: Post;
@@ -50,7 +51,12 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
       />
       <div className="flex-1">
         <header className="flex">
-          <p className="font-semibold">{post.name}</p>
+          <Link
+            to={`/profile/${post.user_name}`}
+            className="font-semibold text-white hover:underline"
+          >
+            {post.name}
+          </Link>
           <p className="pl-2 font-semibold">{setTimeAgo(post.created_at)}</p>
         </header>
         <div>

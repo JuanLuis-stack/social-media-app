@@ -22,7 +22,7 @@ function App() {
           }
         >
           <Route index element={<Home />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/profile/:user_name" element={<Profile />}></Route>
           <Route path="/settings" element={<Settings />}></Route>
         </Route>
         <Route path="/login" element={<Login />}></Route>

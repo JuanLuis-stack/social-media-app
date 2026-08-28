@@ -1,22 +1,11 @@
 // AuthContext.tsx
 
 import React, { createContext, useContext } from "react";
-
-export type LoggedUser = {
-  message: string;
-  token: string;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
-};
+import type { UserRetrived } from "../Schemas/userSchema";
 
 export type AuthContextType = {
-  loggedUser: LoggedUser | null;
-  setLoggedUser: React.Dispatch<React.SetStateAction<LoggedUser | null>>;
-  animate: string;
-  setAnimate: React.Dispatch<React.SetStateAction<string>>;
+  loggedUser: UserRetrived | null;
+  setLoggedUser: React.Dispatch<React.SetStateAction<UserRetrived | null>>;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);

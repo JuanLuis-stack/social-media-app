@@ -4,7 +4,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { userGetter } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { userSchema } from "../Schemas/userSchema";
+import { userRetrivedSchema } from "../Schemas/userSchema";
 
 const styles = {
   input:
@@ -31,7 +31,10 @@ function Login() {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(0);
+  // 0 = everything is good
+  // 1 = empty camp
+  // 2 = user undefined
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -47,32 +50,34 @@ function Login() {
     const { email, password } = logUser;
 
     if (!email || !password) {
-      return setError(true);
+      return setError(1);
     }
 
     try {
       setLoading(true);
 
       const response = await userGetter(logUser);
-      const user = userSchema.parse(response);
+      const user = userRetrivedSchema.parse(response);
 
       setLoggedUser(user);
       localStorage.setItem("user", JSON.stringify(user));
+      navigate("/");
+      setLogUser({
+        email: "",
+        password: "",
+      });
+      setError(0);
     } catch (error) {
       console.log(error);
+      setError(2);
+      return;
     } finally {
       setLoading(false);
     }
-    navigate("/");
-    setLogUser({
-      email: "",
-      password: "",
-    });
-    setError(false);
   }
 
   return (
-    <div className="w-screen h-screen bg-linear-to-bl from-[#117]  to-[#112] p-4">
+    <div className="max-w-screen h-screen bg-linear-to-bl from-[#117]  to-[#112] p-4">
       <h2 className="text-center font-bold">Log in</h2>
       <form
         onSubmit={handleSubmit}
@@ -80,7 +85,7 @@ function Login() {
         action=""
       >
         <label
-          className={error ? styles.errorMessageStyle : ``}
+          className={error === 1 ? styles.errorMessageStyle : ``}
           htmlFor="email"
         >
           Email:
@@ -94,10 +99,12 @@ function Login() {
           placeholder="Type here your email..."
           onChange={handleChange}
         />
-        {error && <p className={styles.errorMessageStyle}>Email is require</p>}
+        {error === 1 && (
+          <p className={styles.errorMessageStyle}>Email is require</p>
+        )}
         <div className="w-full flex justify-between">
           <label
-            className={error ? styles.errorMessageStyle : ``}
+            className={error === 1 ? styles.errorMessageStyle : ``}
             htmlFor="password"
           >
             Password:
@@ -115,7 +122,7 @@ function Login() {
           placeholder="Type here your password..."
           onChange={handleChange}
         />
-        {error && (
+        {error === 1 && (
           <p className={styles.errorMessageStyle}>
             Password must have atleast 6 characters
           </p>
@@ -129,6 +136,11 @@ function Login() {
             Create an Account
           </a>
         </p>
+        {error === 2 && (
+          <div className="w-full flex justify-center">
+            <p className={styles.errorMessageStyle}>User is undefined</p>
+          </div>
+        )}
       </form>
     </div>
   );
