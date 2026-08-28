@@ -7,6 +7,7 @@ const postSchema = z.object({
   title: z.string(),
   content: z.string(),
   created_at: z.string(),
+  user_name: z.string(),
   media_url: z.string().nullable(),
   media_type: z.string().nullable(),
   likes: z.string(),

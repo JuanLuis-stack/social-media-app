@@ -1,27 +1,25 @@
 // AuthProvider.tsx
 
 import { useState, type ReactNode } from "react";
-import { AuthContext, type LoggedUser } from "./AuthContext";
+import { AuthContext } from "./AuthContext";
+import type { UserRetrived } from "../Schemas/userSchema";
 
 type AuthProviderProps = {
   children: ReactNode;
 };
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(() => {
+  const [loggedUser, setLoggedUser] = useState<UserRetrived | null>(() => {
     const user = localStorage.getItem("user");
 
     return user ? JSON.parse(user) : null;
   });
-  const [animate, setAnimate] = useState<string>("");
 
   return (
     <AuthContext.Provider
       value={{
         loggedUser,
         setLoggedUser,
-        animate,
-        setAnimate,
       }}
     >
       {children}
