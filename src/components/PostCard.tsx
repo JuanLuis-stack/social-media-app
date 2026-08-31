@@ -1,6 +1,6 @@
 // RenderPost.tsx
 
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { likeSchema } from "../Schemas/likeSchema";
 import type { Post } from "../Schemas/postSchema";
@@ -11,6 +11,7 @@ import { UseAnimation } from "../context/AnimationContext";
 import ImagePlayer from "./ImagePlayer";
 import { UsePostContext } from "../context/PostContext";
 import { Link } from "react-router-dom";
+import UserProfileMiniCard from "./UserProfileMiniCard";
 
 type RenderPostProps = {
   post: Post;
@@ -21,6 +22,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
   const { loggedUser } = useAuth();
   const { animate, activeAnimation } = UseAnimation();
   const { setPosts } = UsePostContext();
+  const [isVisible, setIsVisible] = useState(false);
 
   async function likeEvent(id: number) {
     if (!loggedUser) return;
@@ -53,9 +55,19 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
         <header className="flex">
           <Link
             to={`/profile/${post.user_name}`}
-            className="font-semibold text-white hover:underline"
+            className="font-semibold text-white hover:underline relative"
+            onMouseEnter={() => {
+              setIsVisible(true);
+            }}
+            onMouseLeave={() => {
+              setIsVisible(false);
+            }}
           >
             {post.name}
+            <UserProfileMiniCard
+              user_name={post.user_name}
+              isVisible={isVisible}
+            ></UserProfileMiniCard>
           </Link>
           <p className="pl-2 font-semibold">{setTimeAgo(post.created_at)}</p>
         </header>
