@@ -35,6 +35,7 @@ function Profile() {
   if (!userProfile) return;
 
   if (loading) return <p>loading...</p>;
+
   return (
     <div className="w-full h-screen flex justify-between flex-col">
       <div className="h-[10%] flex items-center pl-7">
@@ -51,12 +52,14 @@ function Profile() {
           <path d="M19 3h-7v2h7v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2"></path>
         </svg>
         <p className="font-semibold text-xl text-white pl-3">
-          {userProfile.user.name}
+          {userProfile.name}
         </p>
       </div>
-      <div className="w-screen md:w-[75%] h-[90%]">
+      <div className="w-screen md:w-xl h-[90%]">
         <ScrollerContainer>
-          <UserProfileHeader user={userProfile.user}></UserProfileHeader>
+          <div className="px-7 py-7">
+            <UserProfileHeader user={userProfile}></UserProfileHeader>
+          </div>
           <div className="w-full flex justify-center gap-1 px-5">
             {mainUserProfile ? (
               <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70">

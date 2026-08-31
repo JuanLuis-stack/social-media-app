@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { userSchema, type User } from "../Schemas/userSchema";
+import { userRetrivedByUserNameSchema, type User } from "../Schemas/userSchema";
 import { getUserData } from "../services/userService";
 import { useAuth } from "../context/AuthContext";
 
@@ -25,8 +25,8 @@ function useUserProfile(user_name: string | undefined) {
         setLoading(true);
         const response = await getUserData(loggedUser.token, user_name);
 
-        const data = userSchema.parse(response);
-        setUserProfile(data);
+        const data = userRetrivedByUserNameSchema.parse(response);
+        setUserProfile(data.user);
       } catch (error) {
         console.log(error);
       } finally {
