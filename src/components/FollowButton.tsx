@@ -11,7 +11,7 @@ function FollowButton({
 }) {
   return isFollowing ? (
     <button
-      className="border bg-transparent border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70 mr-2"
+      className="border bg-transparent border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-full text-white text-sm font-semibold cursor-pointer hover:opacity-70 mr-2"
       onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         onUnFollow();
@@ -21,7 +21,7 @@ function FollowButton({
     </button>
   ) : (
     <button
-      className="border bg-white border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-[92%] text-black text-sm font-semibold cursor-pointer hover:opacity-70 mr-2"
+      className="border bg-white border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-full text-black text-sm font-semibold cursor-pointer hover:opacity-70 mr-2"
       onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         onFollow();

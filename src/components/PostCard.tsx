@@ -12,6 +12,7 @@ import ImagePlayer from "./ImagePlayer";
 import { UsePostContext } from "../context/PostContext";
 import { Link } from "react-router-dom";
 import UserProfileMiniCard from "./UserProfileMiniCard";
+import FollowCard from "./FollowCard";
 
 type RenderPostProps = {
   post: Post;
@@ -23,6 +24,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
   const { animate, activeAnimation } = UseAnimation();
   const { setPosts } = UsePostContext();
   const [isVisible, setIsVisible] = useState(false);
+  const [isFollowCardVisible, setIsFollowCardVisible] = useState(false);
 
   async function likeEvent(id: number) {
     if (!loggedUser) return;
@@ -46,11 +48,34 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
 
   return (
     <div className="flex border-b border-white/20 px-4 my-3">
-      <img
-        src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
-        alt=""
-        className="h-7  mr-2.5 items-bottom"
-      />
+      <div
+        className="group relative h-7"
+        onClick={() => setIsFollowCardVisible(true)}
+      >
+        <img
+          src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
+          alt=""
+          className="h-8.5  mr-2.5 items-bottom cursor-pointer"
+        />
+        <div className="bg-white rounded-full absolute left-5 border-2 p-0.5 border-black -bottom-3 cursor-pointer duration-250 group-hover:scale-110">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="11"
+            height="11"
+            fill="black"
+            viewBox="0 0 24 24"
+          >
+            <path d="M3 13h8v8h2v-8h8v-2h-8V3h-2v8H3z"></path>
+          </svg>
+        </div>
+        <div onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+          <FollowCard
+            user_name={post.user_name}
+            isFollowCardVisible={isFollowCardVisible}
+            onUnVisibleFollowCard={() => setIsFollowCardVisible(false)}
+          ></FollowCard>
+        </div>
+      </div>
       <div className="flex-1">
         <header className="flex">
           <Link
