@@ -8,13 +8,21 @@ import { postsRetrivedSchema, type Posts } from "../Schemas/postSchema";
 import { getPostsByUserName } from "../services/postsService";
 import { useNavigate, useParams } from "react-router-dom";
 import useUserProfile from "../hooks/useUserProfile";
+import FollowButton from "./FollowButton";
 
 function Profile() {
   const navigate = useNavigate();
   const { user_name } = useParams();
   const { loggedUser } = useAuth();
   const [userPosts, setUserPosts] = useState<Posts | null>(null);
-  const { loading, mainUserProfile, userProfile } = useUserProfile(user_name);
+  const {
+    loading,
+    mainUserProfile,
+    userProfile,
+    isFollowing,
+    follow,
+    unFollow,
+  } = useUserProfile(user_name);
 
   useEffect(() => {
     async function getUserPosts() {
@@ -67,9 +75,11 @@ function Profile() {
               </button>
             ) : (
               <>
-                <button className="border bg-white border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-black text-sm font-semibold cursor-pointer hover:opacity-70 mx-2">
-                  Seguir
-                </button>
+                <FollowButton
+                  isFollowing={isFollowing}
+                  onFollow={follow}
+                  onUnFollow={unFollow}
+                ></FollowButton>
                 <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70 ">
                   Enviar mensage
                 </button>

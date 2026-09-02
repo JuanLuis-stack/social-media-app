@@ -30,7 +30,8 @@ function UserProfileHeader({ user }: UserProfileHeader) {
       <div>
         <div>
           <p className="font-normal text-gray-400 text-sm">
-            24 mill seguidores
+            {user.followers}
+            {Number(user.followers) === 1 ? " seguidor" : " seguidores"}
           </p>
         </div>
       </div>

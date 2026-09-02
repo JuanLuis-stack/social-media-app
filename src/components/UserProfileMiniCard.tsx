@@ -1,4 +1,5 @@
 import useUserProfile from "../hooks/useUserProfile";
+import FollowButton from "./FollowButton";
 import UserProfileHeader from "./UserProfileHeader";
 
 function UserProfileMiniCard({
@@ -8,7 +9,8 @@ function UserProfileMiniCard({
   user_name: string;
   isVisible: boolean;
 }) {
-  const { mainUserProfile, userProfile } = useUserProfile(user_name);
+  const { mainUserProfile, userProfile, isFollowing, follow, unFollow } =
+    useUserProfile(user_name);
 
   if (!isVisible) return null;
 
@@ -22,9 +24,11 @@ function UserProfileMiniCard({
           </button>
         ) : (
           <>
-            <button className="border bg-white border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-[92%] text-black text-sm font-semibold cursor-pointer hover:opacity-70 mr-2">
-              Seguir
-            </button>
+            <FollowButton
+              isFollowing={isFollowing}
+              onFollow={follow}
+              onUnFollow={unFollow}
+            ></FollowButton>
             <button className="border border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70 ">
               Enviar mensage
             </button>
