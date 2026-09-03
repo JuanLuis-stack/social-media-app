@@ -2,20 +2,12 @@ import useUserProfile from "../hooks/useUserProfile";
 import FollowButton from "./FollowButton";
 import UserProfileHeader from "./UserProfileHeader";
 
-function UserProfileMiniCard({
-  user_name,
-  isVisible,
-}: {
-  user_name: string;
-  isVisible: boolean;
-}) {
+function UserProfileMiniCard({ user_name }: { user_name: string }) {
   const { mainUserProfile, userProfile, isFollowing, follow, unFollow } =
     useUserProfile(user_name);
 
-  if (!isVisible) return null;
-
   return (
-    <div className="w-77  max-h-120 min-h-40 animate-[fadeIn_250ms_ease] absolute top-6 z-10  backdrop-blur-3xl bg-black/60 border rounded-2xl border-[#333] p-6">
+    <div className="w-77  max-h-120 min-h-40 animate-[fadeIn_400ms_ease] absolute top-6 z-10  backdrop-blur-3xl bg-black/60 border rounded-2xl border-[#333] p-6">
       <UserProfileHeader user={userProfile}></UserProfileHeader>
       <div className="w-full flex pt-4">
         {mainUserProfile ? (

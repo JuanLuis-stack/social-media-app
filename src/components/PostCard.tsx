@@ -69,11 +69,13 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
           </svg>
         </div>
         <div onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-          <FollowCard
-            user_name={post.user_name}
-            isFollowCardVisible={isFollowCardVisible}
-            onUnVisibleFollowCard={() => setIsFollowCardVisible(false)}
-          ></FollowCard>
+          {isFollowCardVisible && (
+            <FollowCard
+              user_name={post.user_name}
+              isFollowCardVisible={isFollowCardVisible}
+              onUnVisibleFollowCard={() => setIsFollowCardVisible(false)}
+            ></FollowCard>
+          )}
         </div>
       </div>
       <div className="flex-1">
@@ -89,10 +91,11 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
             }}
           >
             {post.name}
-            <UserProfileMiniCard
-              user_name={post.user_name}
-              isVisible={isVisible}
-            ></UserProfileMiniCard>
+            {isVisible && (
+              <UserProfileMiniCard
+                user_name={post.user_name}
+              ></UserProfileMiniCard>
+            )}
           </Link>
           <p className="pl-2 font-semibold">{setTimeAgo(post.created_at)}</p>
         </header>
