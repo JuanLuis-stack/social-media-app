@@ -1,3 +1,4 @@
+import { UseFollowProvider } from "../context/FollowContext";
 import useUserProfile from "../hooks/useUserProfile";
 import FollowButton from "./FollowButton";
 import Overlay from "./Overlay";
@@ -12,8 +13,8 @@ function FollowCard({
   isFollowCardVisible: boolean;
   onUnVisibleFollowCard: () => void;
 }) {
-  const { mainUserProfile, userProfile, isFollowing, follow, unFollow } =
-    useUserProfile(user_name);
+  const { mainUserProfile, userProfile } = useUserProfile(user_name);
+  const { isFollowing, follow, unFollow } = UseFollowProvider();
 
   if (!isFollowCardVisible) return null;
 
@@ -29,9 +30,9 @@ function FollowCard({
           ) : (
             <div className="w-full">
               <FollowButton
-                isFollowing={isFollowing}
-                onFollow={follow}
-                onUnFollow={unFollow}
+                isFollowing={isFollowing?.[user_name] || false}
+                onFollow={() => follow(user_name)}
+                onUnFollow={() => unFollow(user_name)}
               ></FollowButton>
             </div>
           )}

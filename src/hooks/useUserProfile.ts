@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { userRetrivedByUserNameSchema, type User } from "../Schemas/userSchema";
-import { followUser, getUserData, unFollowUser } from "../services/userService";
+import { getUserData } from "../services/userService";
 import { useAuth } from "../context/AuthContext";
 
 function useUserProfile(user_name: string | undefined) {
@@ -9,7 +9,6 @@ function useUserProfile(user_name: string | undefined) {
   const [loading, setLoading] = useState(false);
   const [mainUserProfile, setMainUserProfile] = useState(false);
   const [userProfile, setUserProfile] = useState<User | null>(null);
-  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     async function getCurrentUserProfile() {
@@ -28,7 +27,6 @@ function useUserProfile(user_name: string | undefined) {
 
         const data = userRetrivedByUserNameSchema.parse(response);
         setUserProfile(data.user);
-        setIsFollowing(data.user.is_current_user_following);
       } catch (error) {
         console.log(error);
       } finally {
@@ -38,28 +36,10 @@ function useUserProfile(user_name: string | undefined) {
     getCurrentUserProfile();
   }, [user_name, loggedUser]);
 
-  async function follow() {
-    if (!loggedUser?.token) return;
-    if (!user_name) return;
-
-    followUser(loggedUser.token, user_name);
-    setIsFollowing(true);
-  }
-  async function unFollow() {
-    if (!loggedUser?.token) return;
-    if (!user_name) return;
-
-    unFollowUser(loggedUser.token, user_name);
-    setIsFollowing(false);
-  }
-
   return {
     userProfile,
     mainUserProfile,
     loading,
-    isFollowing,
-    follow,
-    unFollow,
   };
 }
 
