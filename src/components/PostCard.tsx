@@ -105,6 +105,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
             {isVisible && (
               <UserProfileMiniCard
                 user_name={post.user_name}
+                onCloseMiniProfileCard={() => setIsVisible(false)}
               ></UserProfileMiniCard>
             )}
           </Link>

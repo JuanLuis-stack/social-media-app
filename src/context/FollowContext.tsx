@@ -45,7 +45,6 @@ export function FollowProvider({ children }: { children: React.ReactNode }) {
     if (!loggedUser?.token) return;
     if (!user_name) return;
 
-    console.log("follow", user_name);
     await followUser(loggedUser.token, user_name);
     setIsFollowing((prev) => ({ ...prev, [user_name]: true }));
   }
@@ -53,7 +52,6 @@ export function FollowProvider({ children }: { children: React.ReactNode }) {
     if (!loggedUser?.token) return;
     if (!user_name) return;
 
-    console.log("unFollow", user_name);
     await unFollowUser(loggedUser.token, user_name);
     setIsFollowing((prev) => ({ ...prev, [user_name]: false }));
   }

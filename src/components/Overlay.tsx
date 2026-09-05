@@ -10,6 +10,7 @@ type OverlayProps = {
 function Overlay({ closerFunction, children }: OverlayProps): React.ReactNode {
   function handleCloseOverLay(event: React.MouseEvent<HTMLDivElement>) {
     if (event.target === event.currentTarget) {
+      event.preventDefault();
       closerFunction();
     }
   }

@@ -77,6 +77,7 @@ function Profile() {
             ) : (
               <>
                 <FollowButton
+                  user_name={user_name}
                   isFollowing={isFollowing?.[user_name] || false}
                   onFollow={() => follow(user_name)}
                   onUnFollow={() => unFollow(user_name)}
