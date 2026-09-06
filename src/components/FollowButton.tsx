@@ -1,21 +1,41 @@
 import type React from "react";
 import { useState } from "react";
 import UnfollowConfirmation from "./UnfollowConfirmation";
+import Spinner from "./Spinner";
 
 function FollowButton({
   user_name,
   isFollowing,
   onFollow,
   onUnFollow,
-  onUnFollowComplete,
+  onConfirmationComplete,
 }: {
   user_name: string;
   isFollowing: boolean;
-  onFollow: () => void;
-  onUnFollow: () => void;
-  onUnFollowComplete?: () => void;
+  onFollow: () => Promise<void>;
+  onUnFollow: () => Promise<void>;
+  onConfirmationComplete?: () => void;
 }) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const [unFollowCardVisible, setUnFollowCardVisible] = useState(false);
+
+  async function handleOnFollow(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+
+      await onFollow();
+
+      setError(null);
+    } catch (error) {
+      console.log(error);
+      setError("Something went wrong...");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return isFollowing ? (
     <>
@@ -34,25 +54,31 @@ function FollowButton({
           onConfirm={async () => {
             await onUnFollow();
             setUnFollowCardVisible(false);
-            onUnFollowComplete?.();
+            onConfirmationComplete?.();
           }}
           onCancel={() => {
             setUnFollowCardVisible(false);
-            onUnFollowComplete?.();
+            onConfirmationComplete?.();
           }}
         ></UnfollowConfirmation>
       )}
     </>
   ) : (
-    <button
-      className="border bg-white border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-full text-black text-sm font-semibold cursor-pointer hover:opacity-70 mr-2"
-      onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        await onFollow();
-      }}
-    >
-      Seguir
-    </button>
+    <>
+      <button
+        disabled={loading}
+        className={`border ${error ? "bg-red-500" : "bg-white"} border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-full ${error ? "text-white" : "text-black"} text-sm font-semibold ${error ? "cursor-not-allowed" : "cursor-pointer"} hover:opacity-70 mr-2 `}
+        onClick={handleOnFollow}
+      >
+        {error ? (
+          <p className="text-sm">Something went wrong</p>
+        ) : loading ? (
+          <Spinner />
+        ) : (
+          <p>seguir</p>
+        )}
+      </button>
+    </>
   );
 }
 

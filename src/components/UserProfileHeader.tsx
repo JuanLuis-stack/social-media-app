@@ -9,7 +9,7 @@ function UserProfileHeader({ user }: UserProfileHeader) {
     <div className="@container w-full h-full">
       <div className="flex justify-between items-center pb-3">
         <div>
-          <p className="font-semibold text-xl @xs:text-4xl @xs:text-white">
+          <p className="font-semibold text-xl @sm:text-4xl text-white">
             {user.name}
           </p>
           <p className="font-normal text-white">{user.user_name ?? ""}</p>

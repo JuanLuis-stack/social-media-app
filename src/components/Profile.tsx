@@ -35,13 +35,9 @@ function Profile() {
     getUserPosts();
   }, [user_name, loggedUser]);
 
-  if (
-    !user_name ||
-    !userProfile ||
-    userProfile.user_name === null ||
-    isFollowing === null
-  )
-    return <p>loading...</p>;
+  if (!user_name || !userProfile || userProfile.user_name === null) {
+    return <p className="text-red-500 font-bold">Something went wrong</p>;
+  }
 
   if (loading) return <p>loading...</p>;
 
@@ -78,7 +74,7 @@ function Profile() {
               <>
                 <FollowButton
                   user_name={user_name}
-                  isFollowing={isFollowing?.[user_name] || false}
+                  isFollowing={isFollowing[user_name] ?? false}
                   onFollow={() => follow(user_name)}
                   onUnFollow={() => unFollow(user_name)}
                 ></FollowButton>

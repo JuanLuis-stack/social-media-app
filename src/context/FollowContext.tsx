@@ -5,37 +5,36 @@ import { followsRetrievedSchema } from "../Schemas/followsSchema";
 import { getUserFollowers } from "../services/followService";
 
 const FollowContext = createContext<{
-  isFollowing: Record<string, boolean> | null;
-  setIsFollowing: React.Dispatch<
-    React.SetStateAction<Record<string, boolean> | null>
-  >;
+  isFollowing: Record<string, boolean>;
   follow: (user_name: string) => Promise<void>;
   unFollow: (user_name: string) => Promise<void>;
 } | null>(null);
 
 export function FollowProvider({ children }: { children: React.ReactNode }) {
   const { loggedUser } = useAuth();
-  const [isFollowing, setIsFollowing] = useState<Record<
-    string,
-    boolean
-  > | null>(null);
+  const [isFollowing, setIsFollowing] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    if (!loggedUser?.token) return;
-
     async function fetchFollowedUsers() {
       if (!loggedUser?.token) return;
-      const followedUsersData = await getUserFollowers(loggedUser.token);
+      try {
+        const followedUsersData = await getUserFollowers(loggedUser.token);
 
-      const followedUsers = followsRetrievedSchema.parse(followedUsersData);
+        const followedUsers = followsRetrievedSchema.parse(followedUsersData);
 
-      setIsFollowing(
-        followedUsers.followed.reduce<Record<string, boolean>>((acc, user) => {
-          acc[user.user_name] = true;
+        setIsFollowing(
+          followedUsers.followed.reduce<Record<string, boolean>>(
+            (acc, user) => {
+              acc[user.user_name] = true;
 
-          return acc;
-        }, {}),
-      );
+              return acc;
+            },
+            {},
+          ),
+        );
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     fetchFollowedUsers();
@@ -48,18 +47,21 @@ export function FollowProvider({ children }: { children: React.ReactNode }) {
     await followUser(loggedUser.token, user_name);
     setIsFollowing((prev) => ({ ...prev, [user_name]: true }));
   }
+
   async function unFollow(user_name: string) {
     if (!loggedUser?.token) return;
     if (!user_name) return;
 
     await unFollowUser(loggedUser.token, user_name);
-    setIsFollowing((prev) => ({ ...prev, [user_name]: false }));
+    setIsFollowing((prev) => {
+      const followers = { ...prev };
+      delete followers[user_name];
+      return followers;
+    });
   }
 
   return (
-    <FollowContext.Provider
-      value={{ isFollowing, setIsFollowing, follow, unFollow }}
-    >
+    <FollowContext.Provider value={{ isFollowing, follow, unFollow }}>
       {children}
     </FollowContext.Provider>
   );
