@@ -6,12 +6,17 @@ export const userSchema = z.object({
   email: z.string(),
   user_name: z.string().nullable(),
   presentation: z.string().nullable(),
+  followers: z.string(),
+  is_current_user_following: z.boolean(),
 });
 
 export const userRetrivedSchema = z.object({
   message: z.string(),
   token: z.string(),
-  user: userSchema,
+  user: userSchema.omit({
+    followers: true,
+    is_current_user_following: true,
+  }),
 });
 
 export const userRetrivedByUserNameSchema = z.object({

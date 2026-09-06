@@ -8,6 +8,8 @@ import { postsRetrivedSchema, type Posts } from "../Schemas/postSchema";
 import { getPostsByUserName } from "../services/postsService";
 import { useNavigate, useParams } from "react-router-dom";
 import useUserProfile from "../hooks/useUserProfile";
+import FollowButton from "./FollowButton";
+import { UseFollowProvider } from "../context/FollowContext";
 
 function Profile() {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ function Profile() {
   const { loggedUser } = useAuth();
   const [userPosts, setUserPosts] = useState<Posts | null>(null);
   const { loading, mainUserProfile, userProfile } = useUserProfile(user_name);
+  const { isFollowing, follow, unFollow } = UseFollowProvider();
 
   useEffect(() => {
     async function getUserPosts() {
@@ -32,7 +35,9 @@ function Profile() {
     getUserPosts();
   }, [user_name, loggedUser]);
 
-  if (!userProfile) return;
+  if (!user_name || !userProfile || userProfile.user_name === null) {
+    return <p className="text-red-500 font-bold">Something went wrong</p>;
+  }
 
   if (loading) return <p>loading...</p>;
 
@@ -67,9 +72,12 @@ function Profile() {
               </button>
             ) : (
               <>
-                <button className="border bg-white border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-black text-sm font-semibold cursor-pointer hover:opacity-70 mx-2">
-                  Seguir
-                </button>
+                <FollowButton
+                  user_name={user_name}
+                  isFollowing={isFollowing[user_name] ?? false}
+                  onFollow={() => follow(user_name)}
+                  onUnFollow={() => unFollow(user_name)}
+                ></FollowButton>
                 <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70 ">
                   Enviar mensage
                 </button>
