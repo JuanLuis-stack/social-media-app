@@ -62,7 +62,7 @@ function CommentCard({ post, onCloseComments }: CommentCardProps) {
             >
               Cancelar
             </button>
-            <h2>{post.name}</h2>
+            <h2>Publicacion de {post.name}</h2>
           </header>
           <div className="p-3 overflow-y-auto custom-scrollbar items-center">
             <div className="flex">
@@ -71,7 +71,7 @@ function CommentCard({ post, onCloseComments }: CommentCardProps) {
                 alt=""
                 className="h-7 pr-3"
               />
-              <p>{loggedUser?.user.email}</p>
+              <p>{post.user_name}</p>
               <p className="pl-2">{setTimeAgo(post.created_at)}</p>
             </div>
             <div className="py-4">
