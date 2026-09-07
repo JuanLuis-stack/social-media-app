@@ -38,8 +38,14 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
     textarea.style.height = `${textarea.scrollHeight}px`;
   }
 
-  async function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  }
+
+  async function handleSubmit() {
     if (!loggedUser) return;
 
     try {
@@ -49,6 +55,7 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
       reloadComments();
 
       setMessage({ content: "" });
+      handleResize();
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +80,8 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
             placeholder="Qué quieres comentar?"
             value={message.content}
             onChange={handleChange}
-            onKeyDown={handleResize}
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleResize}
             rows={1}
             maxLength={300}
             className="focus:outline-none flex-1 resize-none max-h-21 custom-scrollbar"
@@ -81,7 +89,11 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
           <div
             className="flex items-end"
             id="SubmitCommentIcon"
-            onClick={() => activeAnimation("SubmitCommentIcon")}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+              e.preventDefault();
+              activeAnimation("SubmitCommentIcon");
+              handleSubmit();
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
