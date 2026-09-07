@@ -16,12 +16,12 @@ function RenderComments({ comments }: CommentsProp) {
           <img
             src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
             alt=""
-            className="h-7 min-w-7 rounded-full mr-0 items-bottom"
+            className="h-7 min-w-7 rounded-full mr-2 items-bottom"
           />
         </div>
         <div>
           <div className="flex ">
-            <p>{comment.author}</p>
+            <p className="text-white font-semibold">{comment.author}</p>
             <p className="pl-2">{setTimeAgo(comment.created_at)}</p>
           </div>
           <div>{comment.content}</div>
