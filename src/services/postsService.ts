@@ -62,7 +62,6 @@ export async function submitComment(
   id: number,
   content: string,
 ) {
-  console.log({ content });
   const response = api(`/posts/${id}/comments`, {
     method: "POST",
     headers: {
