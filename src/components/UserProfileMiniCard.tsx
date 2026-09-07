@@ -14,7 +14,7 @@ function UserProfileMiniCard({
   const { isFollowing, follow, unFollow } = UseFollowProvider();
 
   return (
-    <div className="w-77  max-h-70 min-h-40 animate-[fadeIn_400ms_ease] absolute top-6 z-10  backdrop-blur-3xl bg-black/60 border rounded-2xl border-[#333] p-6">
+    <div className="w-77  max-h-70 min-h-40 animate-[fadeIn_400ms_ease] absolute top-6 z-10 bg-[#101010] border rounded-2xl border-[#333] p-6">
       {!userProfile ? (
         <div className="w-full h-full flex justify-center items-center">
           <p className="text-red-500 font-bold">Something went wrong...</p>

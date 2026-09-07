@@ -1,5 +1,6 @@
 import type { CommentsProp } from "../Schemas/commentSchema";
 import setTimeAgo from "../utils/setTimeAgo";
+import UserName from "./UserName";
 
 function RenderComments({ comments }: CommentsProp) {
   return comments.length === 0 ? (
@@ -21,7 +22,7 @@ function RenderComments({ comments }: CommentsProp) {
         </div>
         <div>
           <div className="flex ">
-            <p className="text-white font-semibold">{comment.author}</p>
+            <UserName user_name={comment.author}></UserName>
             <p className="pl-2">{setTimeAgo(comment.created_at)}</p>
           </div>
           <div>{comment.content}</div>

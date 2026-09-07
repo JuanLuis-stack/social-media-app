@@ -10,10 +10,9 @@ import VideoPlayer from "./VideoPlayer";
 import { UseAnimation } from "../context/AnimationContext";
 import ImagePlayer from "./ImagePlayer";
 import { UsePostContext } from "../context/PostContext";
-import { Link } from "react-router-dom";
-import UserProfileMiniCard from "./UserProfileMiniCard";
 import FollowCard from "./FollowCard";
 import { UseFollowProvider } from "../context/FollowContext";
+import UserName from "./UserName";
 
 type RenderPostProps = {
   post: Post;
@@ -24,8 +23,6 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
   const { loggedUser } = useAuth();
   const { animate, activeAnimation } = UseAnimation();
   const { setPosts } = UsePostContext();
-
-  const [isVisible, setIsVisible] = useState(false);
   const [isFollowCardVisible, setIsFollowCardVisible] = useState(false);
   const { isFollowing } = UseFollowProvider();
 
@@ -91,24 +88,7 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
       </div>
       <div className="flex-1">
         <header className="flex">
-          <Link
-            to={`/profile/${post.user_name}`}
-            className="font-semibold text-white hover:underline relative"
-            onMouseEnter={() => {
-              setIsVisible(true);
-            }}
-            onMouseLeave={() => {
-              setIsVisible(false);
-            }}
-          >
-            {post.name}
-            {isVisible && (
-              <UserProfileMiniCard
-                user_name={post.user_name}
-                onCloseMiniProfileCard={() => setIsVisible(false)}
-              ></UserProfileMiniCard>
-            )}
-          </Link>
+          <UserName user_name={post.user_name}></UserName>
           <p className="pl-2 font-semibold">{setTimeAgo(post.created_at)}</p>
         </header>
         <div>
