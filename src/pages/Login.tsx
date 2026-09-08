@@ -1,22 +1,11 @@
 // Login.tsx
 
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { userGetter } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { userRetrivedSchema } from "../Schemas/userSchema";
-
-const styles = {
-  input:
-    "w-full px-2 py-2 border border-white  rounded-md bg-black/10 placeholder:text-xs text-sm",
-  link: "text-blue-500 hover:opacity-45 duration-75",
-  submitterBtn: `cursor-pointer w-full bg-gradient-to-br
-    from-[#15f]
-    to-[#16f]  text-white p-2 rounded-md
-    hover:opacity-45
-    duration-150`,
-  errorMessageStyle: `text-red-500 font-bold text-sm`,
-};
+import loginVideo from "../media/loginTexture.mp4";
 
 type logUserType = {
   email: string;
@@ -24,6 +13,7 @@ type logUserType = {
 };
 
 function Login() {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { setLoggedUser } = useAuth();
   const navigate = useNavigate();
   const [logUser, setLogUser] = useState<logUserType>({
@@ -77,71 +67,109 @@ function Login() {
   }
 
   return (
-    <div className="max-w-screen h-screen bg-linear-to-bl from-[#117]  to-[#112] p-4">
-      <h2 className="text-center font-bold">Log in</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="py-1 flex flex-col gap-2"
-        action=""
-      >
-        <label
-          className={error === 1 ? styles.errorMessageStyle : ``}
-          htmlFor="email"
+    <div
+      className="w-screen h-screen relative"
+      onClick={() => videoRef.current?.play()}
+    >
+      <div className="w-screen flex justify-center h-full p-7  md:absolute left-0 z-10 bg-[#112] xl:bg-transparent md:backdrop-blur-2xl md:justify-center xl:w-[45%]">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2 w-full md:w-md xl:w-sm mt-20 md:mt-10"
+          action=""
         >
-          Email:
-        </label>
-        <input
-          id="email"
-          name="email"
-          value={logUser.email}
-          className={styles.input}
-          type="text"
-          placeholder="Type here your email..."
-          onChange={handleChange}
-        />
-        {error === 1 && (
-          <p className={styles.errorMessageStyle}>Email is require</p>
-        )}
-        <div className="w-full flex justify-between">
-          <label
-            className={error === 1 ? styles.errorMessageStyle : ``}
-            htmlFor="password"
-          >
-            Password:
-          </label>
-          <a className={styles.link} href="">
-            Fotgot password?
-          </a>
-        </div>
-        <input
-          id="password"
-          name="password"
-          value={logUser.password}
-          className={styles.input}
-          type="password"
-          placeholder="Type here your password..."
-          onChange={handleChange}
-        />
-        {error === 1 && (
-          <p className={styles.errorMessageStyle}>
-            Password must have atleast 6 characters
+          <p className="text-center text-2xl text-white font-bold underline pb-14 xl:pb-8">
+            Log in
           </p>
-        )}
-        <button className={styles.submitterBtn} type="submit">
-          {loading ? "Loading..." : "Sign In"}
-        </button>
-        <p className="text-center">
-          Don't have a account?{" "}
-          <a className={styles.link} href="">
-            Create an Account
-          </a>
-        </p>
-        {error === 2 && (
-          <div className="w-full flex justify-center">
-            <p className={styles.errorMessageStyle}>User is undefined</p>
+          <div className="mb-4 grid gap-2 xl:mb-2">
+            <label
+              className={`font-semibold text-white ml-2 text-sm ${error === 1 && `text-red-500 font-bold`}`}
+              htmlFor="email"
+            >
+              Email:
+            </label>
+            <input
+              id="email"
+              name="email"
+              value={logUser.email}
+              className="w-full px-4 bg-white/4 py-3 border border-white/50 focus:outline-none rounded-xl text-sm"
+              type="text"
+              placeholder="Type here your email..."
+              onChange={handleChange}
+            />
+            {error === 1 && (
+              <p className="text-red-500 font-bold text-sm ml-2">
+                Email is require
+              </p>
+            )}
           </div>
-        )}
-      </form>
+          <div className="mb-2">
+            <div className="w-full flex justify-between mb-2">
+              <label
+                className={`font-semibold text-white ml-2 text-sm ${error === 1 && `text-red-500`}`}
+                htmlFor="password"
+              >
+                Password:
+              </label>
+              <a
+                className="text-blue-500 text-sm duration-75 hover:underline hover:opacity-70"
+                href=""
+              >
+                Fotgot password?
+              </a>
+            </div>
+            <input
+              id="password"
+              name="password"
+              value={logUser.password}
+              className="w-full px-4 bg-white/4 py-3 border border-white/50 focus:outline-none rounded-xl text-sm"
+              type="password"
+              placeholder="Type here your password..."
+              onChange={handleChange}
+            />
+            {error === 1 && (
+              <p className="text-red-500 font-bold text-sm ml-28">
+                Password must have atleast 6 characters
+              </p>
+            )}
+          </div>
+          <button
+            className="cursor-pointer md:my-4 w-full bg-linear-to-br from-[#15f] to-[#16f] text-white p-3 xl:p-2 rounded-2xl hover:opacity-80 duration-150 shadow-[-2px_2px_10px_#15f]"
+            type="submit"
+          >
+            {loading ? "Loading..." : "Sign In"}
+          </button>
+          <p className="text-center">
+            Don't have a account?{" "}
+            <a
+              className="text-blue-500 duration-75 hover:underline hover:opacity-70"
+              href=""
+            >
+              Create an Account
+            </a>
+          </p>
+          {error === 2 && (
+            <div className="w-full flex justify-center">
+              <p className="text-red-500 font-bold text-sm">
+                User is undefined
+              </p>
+            </div>
+          )}
+        </form>
+      </div>
+      <div className="hidden xl:block md:w-screen h-screen relative overflow-hidden">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src={loginVideo} type="video/mp4" />
+        </video>
+
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
     </div>
   );
 }
