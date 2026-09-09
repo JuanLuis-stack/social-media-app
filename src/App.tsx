@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Layout from "./layouts/DasboardLayout";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/settings" element={<Settings />}></Route>
         </Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
       </Routes>
     </>
   );

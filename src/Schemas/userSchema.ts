@@ -19,6 +19,16 @@ export const userRetrivedSchema = z.object({
   }),
 });
 
+export const userRegisteredSchema = z.object({
+  message: z.string(),
+  token: z.string(),
+  user: userSchema.omit({
+    presentation: true,
+    followers: true,
+    is_current_user_following: true,
+  }),
+});
+
 export const userRetrivedByUserNameSchema = z.object({
   user: userSchema,
 });
