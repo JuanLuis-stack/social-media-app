@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { userRetrivedSchema } from "../Schemas/userSchema";
 import loginVideo from "../media/loginTexture.mp4";
+import { Link } from "react-router-dom";
 
 type logUserType = {
   email: string;
@@ -110,12 +111,6 @@ function Login() {
               >
                 Password:
               </label>
-              <a
-                className="text-blue-500 text-sm duration-75 hover:underline hover:opacity-70"
-                href=""
-              >
-                Fotgot password?
-              </a>
             </div>
             <input
               id="password"
@@ -140,12 +135,12 @@ function Login() {
           </button>
           <p className="text-center">
             Don't have a account?{" "}
-            <a
+            <Link
               className="text-blue-500 duration-75 hover:underline hover:opacity-70"
-              href=""
+              to="/register"
             >
-              Create an Account
-            </a>
+              Create account
+            </Link>
           </p>
           {error === 2 && (
             <div className="w-full flex justify-center">

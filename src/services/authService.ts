@@ -18,3 +18,20 @@ export async function userGetter(user: User) {
 
   return response;
 }
+
+export async function userRegister(user: {
+  name: string;
+  user_name: string;
+  email: string;
+  password: string;
+}) {
+  const response = await api("/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+
+  return response;
+}
