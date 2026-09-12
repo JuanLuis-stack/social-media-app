@@ -28,7 +28,8 @@ function ImagePlayer({ post }: { post: Post }) {
       <img
         id={`image-${post.id}-container`}
         className={`rounded-xl p-1 group-[&:fullscreen]:min-h-screen group-[&:fullscreen]:rounded-none max-h-100 ${animate == `image-${post.id}-container` && "animate-[spanIn_400ms_ease]"}`}
-        onClick={() => {
+        onClick={(e: React.MouseEvent<HTMLImageElement>) => {
+          e.stopPropagation();
           activeAnimation(`image-${post.id}-container`);
           activeFullScreen();
         }}

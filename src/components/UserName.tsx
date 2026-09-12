@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import UserProfileMiniCard from "./UserProfileMiniCard";
 
@@ -6,6 +6,7 @@ function UserName({ user_name }: { user_name: string }) {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <Link
+      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.stopPropagation()}
       to={`/profile/${user_name}`}
       className="font-semibold text-white hover:underline relative"
       onMouseEnter={() => setIsVisible(true)}

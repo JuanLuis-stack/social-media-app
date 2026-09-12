@@ -62,17 +62,17 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
   }
 
   return (
-    <article className="bg-[#101010] md:bg-black/40 md:backdrop-blur-xl flex items-stretch w-full h-auto p-4">
-      <div className="flex items-stretch w-full h-auto border border-white/10 rounded-3xl bg-white/7 md:bg-black/70 overflow-hidden">
-        <div className="mr-3 flex items-end">
+    <article className="bg-transparent flex items-stretch w-full h-auto p-4 ">
+      <div className="flex items-stretch w-full h-auto border border-white/10 rounded-3xl bg-white/7 overflow-hidden p-2">
+        <div className="mr-3 flex items-start">
           <img
             src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
             alt=""
-            className="h-7 mb-2.5 ml-2"
+            className="h-8"
           />
         </div>
         <form
-          className="w-svh h-auto flex flex-1 md:bg-black/45 rounded-xl p-3"
+          className="w-svh h-auto flex flex-1 rounded-xl"
           onSubmit={handleSubmit}
         >
           <textarea
@@ -87,7 +87,7 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
             className="focus:outline-none flex-1 resize-none max-h-21 custom-scrollbar"
           ></textarea>
           <div
-            className="flex items-end"
+            className="flex items-start justify-center pl-2 p-1"
             id="SubmitCommentIcon"
             onClick={(e: React.MouseEvent<HTMLDivElement>) => {
               e.preventDefault();

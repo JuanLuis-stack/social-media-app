@@ -42,6 +42,7 @@ function FollowButton({
       <button
         className="border bg-transparent border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-full text-white text-sm font-semibold cursor-pointer hover:opacity-70 mr-2"
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+          e.stopPropagation();
           e.preventDefault();
           setUnFollowCardVisible(true);
         }}
@@ -68,7 +69,10 @@ function FollowButton({
       <button
         disabled={loading}
         className={`border ${error ? "bg-red-500" : "bg-white"} border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-full ${error ? "text-white" : "text-black"} text-sm font-semibold ${error ? "cursor-not-allowed" : "cursor-pointer"} hover:opacity-70 mr-2 `}
-        onClick={handleOnFollow}
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+          e.stopPropagation();
+          handleOnFollow(e);
+        }}
       >
         {error ? (
           <p className="text-sm">Something went wrong</p>

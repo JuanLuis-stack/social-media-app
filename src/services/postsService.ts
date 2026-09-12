@@ -11,6 +11,17 @@ export async function getPosts(token: string) {
   return response;
 }
 
+export async function getPostById(token: string, id: string) {
+  const response = api(`/posts/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+}
+
 export async function getPostsByUserName(token: string, user_name: string) {
   const response = api(`/users/${user_name}/posts`, {
     headers: {

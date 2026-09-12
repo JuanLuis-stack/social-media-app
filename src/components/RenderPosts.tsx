@@ -1,9 +1,7 @@
 // RenderPosts.tsx
 
-import React, { useState } from "react";
-import type { Post, Posts } from "../Schemas/postSchema";
+import type { Posts } from "../Schemas/postSchema";
 import PostCard from "./PostCard";
-import CommentCard from "./CommentCard";
 
 type RenderPostsType = {
   posts: Posts | null;
@@ -11,16 +9,8 @@ type RenderPostsType = {
 };
 
 function RenderPosts({ posts, children }: RenderPostsType) {
-  const [seletedPost, setSeletedPost] = useState<Post | null>(null);
-
   return (
     <>
-      {seletedPost && (
-        <CommentCard
-          post={seletedPost}
-          onCloseComments={() => setSeletedPost(null)}
-        />
-      )}
       <ul className="h-full w-full">
         {!posts ? (
           <div className="w-full h-1/2 flex justify-center items-center">
@@ -28,14 +18,9 @@ function RenderPosts({ posts, children }: RenderPostsType) {
           </div>
         ) : (
           <>
-            {/* <SubmitterPostCard /> */}
             {children}
             {posts.map((post) => (
-              <PostCard
-                key={post.id}
-                post={post}
-                setSeletedPost={setSeletedPost}
-              />
+              <PostCard key={post.id} post={post} />
             ))}
           </>
         )}

@@ -1,14 +1,14 @@
 import { useAuth } from "../context/AuthContext";
-import ScrollerContainer from "./ScrollerContainer";
-import UserProfileHeader from "./UserProfileHeader";
-import SubmitterPostCard from "./SubmitterPostCard";
-import RenderPosts from "./RenderPosts";
+import ScrollerContainer from "../components/ScrollerContainer";
+import UserProfileHeader from "../components/UserProfileHeader";
+import SubmitterPostCard from "../components/SubmitterPostCard";
+import RenderPosts from "../components/RenderPosts";
 import { useEffect, useState } from "react";
 import { postsRetrivedSchema, type Posts } from "../Schemas/postSchema";
 import { getPostsByUserName } from "../services/postsService";
 import { useNavigate, useParams } from "react-router-dom";
 import useUserProfile from "../hooks/useUserProfile";
-import FollowButton from "./FollowButton";
+import FollowButton from "../components/FollowButton";
 import { UseFollowProvider } from "../context/FollowContext";
 
 function Profile() {
@@ -51,7 +51,13 @@ function Profile() {
           fill="currentColor"
           viewBox="0 0 24 24"
           className="cursor-pointer"
-          onClick={() => navigate("/", { replace: true })}
+          onClick={() => {
+            if (window.history.length > 1) {
+              navigate(-1);
+            } else {
+              navigate(`/`);
+            }
+          }}
         >
           <path d="M9 13h7v-2H9V7l-6 5 6 5z"></path>
           <path d="M19 3h-7v2h7v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2"></path>

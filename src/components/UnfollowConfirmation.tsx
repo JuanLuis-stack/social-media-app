@@ -59,6 +59,7 @@ function UnfollowConfirmation({
             disabled={loading}
             className="w-[50%] hover:opacity-60 duration-200 text-white text-sm font-bold py-4 border-t-[0.5px]  border-r-[0.5px] cursor-pointer border-white/20"
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
               e.preventDefault();
               onCancel();
             }}
@@ -68,7 +69,10 @@ function UnfollowConfirmation({
           <button
             disabled={loading}
             className="w-[50%] hover:opacity-60 duration-200 font-bold py-4 border-t-[0.5px] cursor-pointer border-white/20 text-red-500 text-sm"
-            onClick={handleOnConfirm}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
+              handleOnConfirm(e);
+            }}
           >
             {loading ? <Spinner /> : <p>Dejar de seguir</p>}
           </button>

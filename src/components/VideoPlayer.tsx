@@ -53,7 +53,8 @@ function VideoPlayer({ videoUrl, videoType }: VideoPlayerType) {
     <div
       id={`video-${videoUrl}-Container`}
       className={`w-fit relative ${animate === `video-${videoUrl}-Container` && "animate-[spanIn_400ms_ease]"}`}
-      onClick={() => {
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
         activeAnimation(`video-${videoUrl}-Container`);
         activeFullScreen();
       }}

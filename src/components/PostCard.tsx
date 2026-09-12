@@ -12,45 +12,51 @@ import ImagePlayer from "./ImagePlayer";
 import { UsePostContext } from "../context/PostContext";
 import FollowCard from "./FollowCard";
 import { UseFollowProvider } from "../context/FollowContext";
+import { useNavigate } from "react-router-dom";
 import UserName from "./UserName";
 
 type RenderPostProps = {
   post: Post;
-  setSeletedPost: React.Dispatch<React.SetStateAction<Post | null>>;
+  onUpdatedPost?: (updatedPost: Post) => void;
 };
 
-function PostCard({ post, setSeletedPost }: RenderPostProps) {
+function PostCard({ post, onUpdatedPost }: RenderPostProps) {
   const { loggedUser } = useAuth();
   const { animate, activeAnimation } = UseAnimation();
   const { setPosts } = UsePostContext();
   const [isFollowCardVisible, setIsFollowCardVisible] = useState(false);
   const { isFollowing } = UseFollowProvider();
+  const navigate = useNavigate();
 
   async function likeEvent(id: number) {
     if (!loggedUser) return;
     const response = await likePost(loggedUser?.token, id);
     const liked = likeSchema.parse(response);
 
+    const updatedPost = {
+      ...post,
+      liked_by_current_user: liked.liked_by_current_user,
+      likes: liked.likes,
+    };
+
     setPosts((prev) =>
-      !prev
-        ? null
-        : prev.map((post) =>
-            post.id === id
-              ? {
-                  ...post,
-                  liked_by_current_user: liked.liked_by_current_user,
-                  likes: liked.likes,
-                }
-              : post,
-          ),
+      !prev ? null : prev.map((post) => (post.id === id ? updatedPost : post)),
     );
+
+    onUpdatedPost?.(updatedPost);
   }
 
   return (
-    <div className="flex border-b border-white/20 px-4 my-3">
+    <div
+      className="flex border-b border-white/20 px-4 my-3"
+      onClick={() => navigate(`/${post.user_name}/posts/${post.id}`)}
+    >
       <div
         className="group relative h-7"
-        onClick={() => setIsFollowCardVisible(true)}
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+          e.stopPropagation();
+          setIsFollowCardVisible(true);
+        }}
       >
         <img
           src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
@@ -112,7 +118,8 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
             id={`like-${post.id}-Btn`}
             className={`flex justify-center items-center w-1/3 hover:bg-white/15 duration-200 cursor-pointer rounded-xl p-1 h-9
             ${animate == `like-${post.id}-Btn` && "animate-[spanIn_400ms_ease]"}`}
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
               likeEvent(post.id);
               activeAnimation(`like-${post.id}-Btn`);
             }}
@@ -141,7 +148,6 @@ function PostCard({ post, setSeletedPost }: RenderPostProps) {
             className={`flex justify-center items-center w-1/3 hover:bg-white/15 duration-200 cursor-pointer rounded-xl p-1 h-9 
             ${animate == `comment-${post.id}-Btn` && "animate-[spanIn_400ms_ease]"}`}
             onClick={() => {
-              setSeletedPost(post);
               activeAnimation(`comment-${post.id}-Btn`);
             }}
           >
