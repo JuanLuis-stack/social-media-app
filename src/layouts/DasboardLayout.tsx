@@ -6,10 +6,10 @@ import LoadPostCard from "../components/LoadPostCard";
 
 function Layout() {
   return (
-    <div className="flex relative bg-linear-to-tl from-[#111] to-[#111]">
+    <div className="flex relative bg-linear-to-tl from-[#1125] to-[#111]">
       <Navbar />
       <LoadPostCard />
-      <main className="flex md:ml-30 w-screen relative">
+      <main className="flex md:ml-17 w-screen relative">
         <Outlet />
       </main>
     </div>

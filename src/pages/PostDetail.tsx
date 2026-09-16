@@ -10,7 +10,7 @@ import type { Comments } from "../Schemas/commentSchema";
 import RenderComments from "../components/RenderComments";
 
 function PostDetail() {
-  const { getPostByUserId, getCommentsByUserId } = UsePostContext();
+  const { getPostById, getCommentsByUserId } = UsePostContext();
   const { postId } = useParams<{ postId: string }>();
   const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comments | null>();
@@ -22,7 +22,7 @@ function PostDetail() {
       if (!postId) return;
       setLoading(true);
 
-      const postResponse = await getPostByUserId(postId);
+      const postResponse = await getPostById(postId);
       if (!postResponse) return;
 
       setPost(postResponse);
@@ -58,6 +58,7 @@ function PostDetail() {
         <p className="font-semibold text-xl text-white pl-3">Publicacion</p>
       </div>
       <div className="h-[87%] md:w-xl">
+        {/* Pending to remake as a column component */}
         <ScrollerContainer>
           {!post || loading || !comments ? (
             <div className="w-full h-full flex items-center justify-center">

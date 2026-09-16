@@ -6,15 +6,26 @@ import {
   type Posts,
 } from "../Schemas/postSchema";
 import { useAuth } from "./AuthContext";
-import { getComments, getPostById, getPosts } from "../services/postsService";
+import {
+  getComments,
+  getPostById,
+  getPosts,
+  likePost,
+} from "../services/postsService";
 import { renderCommentsSchema, type Comments } from "../Schemas/commentSchema";
+import { likeSchema } from "../Schemas/likeSchema";
 
 type PostContextType = {
   posts: Posts | null;
   setPosts: React.Dispatch<React.SetStateAction<Posts | null>>;
   loadPosts: () => void;
-  getPostByUserId: (id: string) => Promise<Post | undefined>;
+  getPostById: (id: string) => Promise<Post | undefined>;
   getCommentsByUserId: (id: number) => Promise<Comments | undefined>;
+  likeEvent: (
+    id: number,
+    post: Post,
+    onUpdatedPost?: (updatedPost: Post) => void,
+  ) => Promise<void>;
 };
 
 const PostContext = createContext<PostContextType | null>(null);
@@ -40,7 +51,7 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  async function getPostByUserId(id: string) {
+  async function retrievePostById(id: string) {
     try {
       if (!loggedUser) throw new Error("Unthorizate");
 
@@ -78,6 +89,27 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
       console.log(error);
     }
   }
+  async function likeEvent(
+    id: number,
+    post: Post,
+    onUpdatedPost?: (updatedPost: Post) => void,
+  ) {
+    if (!loggedUser) return;
+    const response = await likePost(loggedUser?.token, id);
+    const liked = likeSchema.parse(response);
+
+    const updatedPost = {
+      ...post,
+      liked_by_current_user: liked.liked_by_current_user,
+      likes: liked.likes,
+    };
+
+    setPosts((prev) =>
+      !prev ? null : prev.map((post) => (post.id === id ? updatedPost : post)),
+    );
+
+    onUpdatedPost?.(updatedPost);
+  }
 
   useEffect(() => {
     loadPosts();
@@ -89,8 +121,9 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
         posts,
         setPosts,
         loadPosts,
-        getPostByUserId,
+        getPostById: retrievePostById,
         getCommentsByUserId,
+        likeEvent,
       }}
     >
       {children}

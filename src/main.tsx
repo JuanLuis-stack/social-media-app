@@ -8,6 +8,7 @@ import { AnimationProvider } from "./context/AnimationContext.tsx";
 import { PostsProvider } from "./context/PostContext.tsx";
 import { SubmitterPostProvider } from "./context/SubmitPostContext.tsx";
 import { FollowProvider } from "./context/FollowContext.tsx";
+import { NotificationProvider } from "./context/NotificationsContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,9 +17,11 @@ createRoot(document.getElementById("root")!).render(
         <AnimationProvider>
           <SubmitterPostProvider>
             <FollowProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
+              <NotificationProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </NotificationProvider>
             </FollowProvider>
           </SubmitterPostProvider>
         </AnimationProvider>

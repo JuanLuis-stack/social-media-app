@@ -31,7 +31,7 @@ function Navbarlink({
           activeAnimation("newPostNavbar");
           openSubmitPost();
         }}
-        className={`flex justify-center items-center cursor-pointer hover:bg-white/20 md:bg-transparent p-2 rounded-md w-15 md:w-full md:justify-start bg-white/8 duration-300 ${animate === "newPostNavbar" && "animate-[spanIn_400ms_ease]"}`}
+        className={`flex justify-center items-center cursor-pointer text-white hover:bg-white/20 md:bg-transparent p-2 rounded-md w-15 md:w-full md:justify-start bg-white/8 duration-300 ${animate === "newPostNavbar" && "animate-[spanIn_400ms_ease]"}`}
       >
         <div
           className={`flex items-center ${animate === "newPostNavbar" && `animate-[spanIn_400ms_ease]`}`}
@@ -56,15 +56,15 @@ function Navbarlink({
   return (
     <NavLink
       className={({ isActive }) =>
-        `flex start text-sm justify-start md:justify-between xl:w-full md:w-9 md:max-xl:group-hover:w-full lg:text-md hover:bg-white/3 p-2 rounded-md duration-300 ${modifitedClass ?? ""} ${isActive && "bg-white/10"}`
+        `flex start text-sm justify-start md:justify-between xl:w-full md:w-9 md:max-xl:group-hover:w-full lg:text-md text-white hover:bg-white/3 p-2 rounded-md duration-300 ${modifitedClass ?? ""} ${isActive && "bg-white/10"}`
       }
       to={to}
       id={name}
       onClick={() => activeAnimation(name)}
     >
       <div
-        className={`flex items-center md:justify-center ${animate === name && `animate-[spanIn_400ms_ease]`}`}
-        id={name}
+        id={`NavbarContainer-${name}`}
+        className={`flex items-center md:justify-center ${animate === `NavbarContainer-${name}` && `animate-[spanIn_400ms_ease]`}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

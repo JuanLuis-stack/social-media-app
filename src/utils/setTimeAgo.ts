@@ -19,6 +19,7 @@ function setTimeAgo(createdAt: string) {
   if (Math.floor(days) > 0) return `${Math.floor(days)} d`;
   if (Math.floor(houers) > 0) return `${Math.floor(houers)} hr`;
   if (Math.floor(minutes) > 0) return `${Math.floor(minutes)} min`;
+  if (Math.floor(secconds) > 0) return `Just now`;
 }
 
 export default setTimeAgo;

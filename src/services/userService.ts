@@ -1,7 +1,18 @@
 import { api } from "./apiService";
 
 export async function getUserData(token: string, name: string) {
-  const response = await api(`/users/${name}`, {
+  const response = await api(`/users/${name}/user_name`, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+}
+
+export async function getUserById(token: string, id: number) {
+  const response = await api(`/users/${id}/user_id`, {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,

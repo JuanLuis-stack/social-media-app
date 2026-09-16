@@ -42,64 +42,66 @@ function Profile() {
   if (loading) return <p>loading...</p>;
 
   return (
-    <div className="w-full h-screen flex justify-between flex-col">
-      <div className="h-[10%] flex items-center pl-7">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          className="cursor-pointer"
-          onClick={() => {
-            if (window.history.length > 1) {
-              navigate(-1);
-            } else {
-              navigate(`/`);
-            }
-          }}
-        >
-          <path d="M9 13h7v-2H9V7l-6 5 6 5z"></path>
-          <path d="M19 3h-7v2h7v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2"></path>
-        </svg>
-        <p className="font-semibold text-xl text-white pl-3">
-          {userProfile.name}
-        </p>
-      </div>
-      <div className="w-screen md:w-xl h-[90%]">
-        <ScrollerContainer>
-          <div className="px-7 py-7">
-            <UserProfileHeader user={userProfile}></UserProfileHeader>
-          </div>
-          <div className="w-full flex justify-center gap-1 px-5">
-            {mainUserProfile ? (
-              <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70">
-                Editar perfil
-              </button>
-            ) : (
-              <>
-                <FollowButton
-                  user_name={user_name}
-                  isFollowing={isFollowing[user_name] ?? false}
-                  onFollow={() => follow(user_name)}
-                  onUnFollow={() => unFollow(user_name)}
-                ></FollowButton>
-                <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70 ">
-                  Enviar mensage
-                </button>
-              </>
-            )}
-          </div>
-          <div>
-            <div className="w-full pt-6 flex justify-center items-center border-b border-white/30">
-              <p className="text-white pb-2 px-4 border-b font-semibold h-full">
-                Publicaciones
-              </p>
+    <div className="flex justify-center xl:justify-start w-full h-screen">
+      <div className="overflow-hidden flex flex-col justify-between">
+        <div className="h-[10%] flex items-center justify-start pl-7">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            className="cursor-pointer"
+            onClick={() => {
+              if (window.history.length > 1) {
+                navigate(-1);
+              } else {
+                navigate(`/`);
+              }
+            }}
+          >
+            <path d="M9 13h7v-2H9V7l-6 5 6 5z"></path>
+            <path d="M19 3h-7v2h7v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2"></path>
+          </svg>
+          <p className="font-semibold text-xl text-white pl-3">
+            {userProfile.name}
+          </p>
+        </div>
+        <div className="w-screen md:w-xl h-[90%] rounded-t-3xl overflow-hidden">
+          <ScrollerContainer>
+            <div className="px-7 py-7">
+              <UserProfileHeader user={userProfile}></UserProfileHeader>
             </div>
-            {mainUserProfile && <SubmitterPostCard></SubmitterPostCard>}
-            <RenderPosts posts={userPosts}></RenderPosts>
-          </div>
-        </ScrollerContainer>
+            <div className="w-full flex justify-center gap-1 px-5">
+              {mainUserProfile ? (
+                <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70">
+                  Editar perfil
+                </button>
+              ) : (
+                <>
+                  <FollowButton
+                    user_name={user_name}
+                    isFollowing={isFollowing[user_name] ?? false}
+                    onFollow={() => follow(user_name)}
+                    onUnFollow={() => unFollow(user_name)}
+                  ></FollowButton>
+                  <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70 ">
+                    Enviar mensage
+                  </button>
+                </>
+              )}
+            </div>
+            <div>
+              <div className="w-full pt-6 flex justify-center items-center border-b border-white/30">
+                <p className="text-white pb-2 px-4 border-b font-semibold h-full">
+                  Publicaciones
+                </p>
+              </div>
+              {mainUserProfile && <SubmitterPostCard></SubmitterPostCard>}
+              <RenderPosts posts={userPosts}></RenderPosts>
+            </div>
+          </ScrollerContainer>
+        </div>
       </div>
     </div>
   );

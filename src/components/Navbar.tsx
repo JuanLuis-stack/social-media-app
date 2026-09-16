@@ -1,6 +1,7 @@
 // Navbar.tsx
 
 import { useAuth } from "../context/AuthContext";
+import { UseNotifications } from "../context/NotificationsContext";
 import { UsePostContext } from "../context/PostContext";
 import NavbarLink from "./NavbarLink";
 
@@ -13,6 +14,7 @@ type Route = {
 function Navbar() {
   const { loadPosts } = UsePostContext();
   const { loggedUser } = useAuth();
+  const { notifications } = UseNotifications();
 
   const routes: Route[] = [
     {
@@ -30,10 +32,15 @@ function Navbar() {
       name: "Profile",
       url: "M12 2a5 5 0 1 0 0 10 5 5 0 1 0 0-10M4 22h16c.55 0 1-.45 1-1v-1c0-3.86-3.14-7-7-7h-4c-3.86 0-7 3.14-7 7v1c0 .55.45 1 1 1",
     },
+    {
+      path: `/activity/${notifications.type}`,
+      name: "Actividad",
+      url: "M11.29 20.69c.2.2.45.29.71.29s.51-.1.71-.29l7.5-7.5c2.35-2.35 2.35-6.05 0-8.41-2.29-2.29-5.84-2.35-8.21-.2-2.36-2.15-5.91-2.09-8.21.2-2.35 2.36-2.35 6.06 0 8.41z",
+    },
   ];
 
   return (
-    <nav className="group flex items-center h-13 w-screen fixed bottom-0 py-5 px-3 gap-10 md:flex-col md:h-screen md:w-15 md:max-xl:hover:w-50 xl:w-60 xl:relative xl:bg-white/1 backdrop-blur-2xl z-10 duration-300 select-none">
+    <nav className="group flex items-center h-13 w-screen fixed -bottom-1 md:bottom-1 py-5 px-3 gap-10 md:flex-col md:h-screen md:w-15 md:max-xl:hover:w-50 xl:w-60 xl:relative max-md:bg-[#0707070] backdrop-blur-2xl z-10 duration-300 select-none">
       <header className="flex justify-center flex-col items-center relative cursor-pointer">
         <h1
           onClick={loadPosts}

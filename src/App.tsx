@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import PostDetail from "./pages/PostDetail";
+import Activity from "./pages/Activity";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             element={<PostDetail />}
           ></Route>
           <Route path="/settings" element={<Settings />}></Route>
+          <Route path="/activity/:type" element={<Activity />}></Route>
         </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
