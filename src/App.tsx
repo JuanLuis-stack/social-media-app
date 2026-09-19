@@ -2,13 +2,15 @@
 
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 import Settings from "./components/Settings";
 import Home from "./pages/Home";
 import Layout from "./layouts/DasboardLayout";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
+import PostDetail from "./pages/PostDetail";
+import Activity from "./pages/Activity";
 
 function App() {
   return (
@@ -24,7 +26,12 @@ function App() {
         >
           <Route index element={<Home />}></Route>
           <Route path="/profile/:user_name" element={<Profile />}></Route>
+          <Route
+            path="/:user_name/posts/:postId"
+            element={<PostDetail />}
+          ></Route>
           <Route path="/settings" element={<Settings />}></Route>
+          <Route path="/activity/:type" element={<Activity />}></Route>
         </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>

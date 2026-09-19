@@ -11,13 +11,13 @@ function RenderComments({ comments }: CommentsProp) {
     comments.map((comment) => (
       <li
         key={comment.id}
-        className="border-b border-[#444] md:border-none md:bg-white/6 my-2 md:rounded-xl flex p-3 md:p-3"
+        className="w-full border-t border-[#333] my-2 flex p-3"
       >
-        <div className="w-10">
+        <div className="">
           <img
             src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
             alt=""
-            className="h-7 min-w-7 rounded-full mr-2 items-bottom"
+            className="h-9 min-w-7 rounded-full mr-4 items-bottom"
           />
         </div>
         <div>
@@ -25,7 +25,7 @@ function RenderComments({ comments }: CommentsProp) {
             <UserName user_name={comment.author}></UserName>
             <p className="pl-2">{setTimeAgo(comment.created_at)}</p>
           </div>
-          <div>{comment.content}</div>
+          <div className="text-start">{comment.content}</div>
         </div>
       </li>
     ))

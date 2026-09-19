@@ -4,7 +4,7 @@ export const userSchema = z.object({
   id: z.number(),
   name: z.string(),
   email: z.string(),
-  user_name: z.string().nullable(),
+  user_name: z.string(),
   presentation: z.string().nullable(),
   followers: z.string(),
   is_current_user_following: z.boolean(),

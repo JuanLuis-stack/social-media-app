@@ -18,12 +18,7 @@ const postSchema = z.object({
 
 export const postRetrivedSchema = z.object({
   message: z.string(),
-  user: postSchema.omit({
-    likes: true,
-    comments: true,
-    name: true,
-    liked_by_current_user: true,
-  }),
+  post: postSchema,
 });
 
 export const postsSchema = z.array(postSchema);

@@ -1,14 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import UserProfileMiniCard from "./UserProfileMiniCard";
+import { useNavigate } from "react-router-dom";
+import { UseColumn } from "../context/ColumnContext";
+import { UseColumnNavigation } from "../context/ColumnNavigationContext";
 
 function UserName({ user_name }: { user_name: string }) {
+  const navigate = useNavigate();
+  const { shouldUseColumnNavigation, columnId } = UseColumn();
+  const { addHistory } = UseColumnNavigation();
+
   const [isVisible, setIsVisible] = useState(false);
   return (
-    <Link
-      to={`/profile/${user_name}`}
+    <div
+      onClick={(e: React.MouseEvent<HTMLParagraphElement>) => {
+        e.stopPropagation();
+        if (!shouldUseColumnNavigation) {
+          navigate(`/profile/${user_name}`);
+        } else {
+          addHistory({
+            column_id: columnId,
+            type: "profile",
+            data: { user_name: user_name },
+          });
+        }
+      }}
       className="font-semibold text-white hover:underline relative"
-      onMouseEnter={() => setIsVisible(true)}
+      onMouseEnter={() => setIsVisible(false)}
       onMouseLeave={() => setIsVisible(false)}
     >
       {user_name}
@@ -18,7 +35,7 @@ function UserName({ user_name }: { user_name: string }) {
           onCloseMiniProfileCard={() => setIsVisible(false)}
         ></UserProfileMiniCard>
       )}
-    </Link>
+    </div>
   );
 }
 

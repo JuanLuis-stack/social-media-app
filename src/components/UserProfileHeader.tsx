@@ -12,7 +12,9 @@ function UserProfileHeader({ user }: UserProfileHeader) {
           <p className="font-semibold text-xl @sm:text-4xl text-white">
             {user.name}
           </p>
-          <p className="font-normal text-white">{user.user_name ?? ""}</p>
+          <p className="font-normal text-white text-start">
+            {user.user_name ?? ""}
+          </p>
         </div>
         <div className="flex items-center">
           <img
@@ -29,7 +31,7 @@ function UserProfileHeader({ user }: UserProfileHeader) {
       </div>
       <div>
         <div>
-          <p className="font-normal text-gray-400 text-sm">
+          <p className="font-normal text-gray-400 text-sm text-start">
             {user.followers}
             {Number(user.followers) === 1 ? " seguidor" : " seguidores"}
           </p>

@@ -9,7 +9,7 @@ export const commentSchema = z.object({
   author: z.string(),
 });
 
-export const commentsSchema = z.array(commentSchema); // Not secure yet
+export const commentsSchema = z.array(commentSchema);
 
 export const renderCommentsSchema = z.object({
   message: z.string(),
@@ -17,10 +17,10 @@ export const renderCommentsSchema = z.object({
   comments: z.number(),
 });
 
-export type CommentProps = z.infer<typeof commentsSchema>; // Not secure yet
+export type Comments = z.infer<typeof commentsSchema>;
 
 export type CommentsProp = {
-  comments: CommentProps;
+  comments: Comments;
 };
 
 export type RenderCommentProps = z.infer<typeof renderCommentsSchema>;
