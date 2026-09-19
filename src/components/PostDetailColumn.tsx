@@ -33,7 +33,7 @@ function PostDetailColumn({ id }: { id: string }) {
   return (
     <ScrollerContainer>
       {!post || loading || !comments ? (
-        <div className="w-full flex items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center">
           <Spinner />
         </div>
       ) : (

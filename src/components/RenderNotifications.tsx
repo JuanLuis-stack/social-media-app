@@ -1,18 +1,48 @@
 import NotificationCard from "./NotificationCard";
 import Spinner from "./Spinner";
 import { UseNotifications } from "../context/NotificationsContext";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function RenderNotifications() {
-  const { notifications, loading, error } = UseNotifications();
+  const { notifications, getNotifications, loading, error } =
+    UseNotifications();
 
-  if (loading) return <Spinner></Spinner>;
+  useEffect(() => {
+    getNotifications();
+  }, []);
+
+  if (loading)
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spinner></Spinner>
+      </div>
+    );
 
   return (
-    <div className="h-full w-full">
+    <div className="@container h-full w-full">
       {error || !notifications.notifications ? (
-        <p className="text-red-500 font-semibold underline py-20 text-center">
-          Something went wrong
-        </p>
+        <div className="h-full w-full flex flex-col items-center justify-start md:p-20 @max-[400px]:p-10">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100"
+              height="100"
+              fill="#f11"
+              viewBox="0 0 24 24"
+            >
+              <path d="m20.42 6.11-7.97-4c-.28-.14-.62-.14-.9 0l-7.97 4c-.31.15-.51.45-.55.79-.01.11-.96 10.76 8.55 15.01a.98.98 0 0 0 .82 0C21.91 17.66 20.97 7 20.95 6.9a.98.98 0 0 0-.55-.79ZM12 19.9C5.26 16.63 4.94 9.64 5 7.64l7-3.51 7 3.51c.04 1.99-.33 9.02-7 12.26"></path>
+              <path d="M11 11h2v6h-2zm0-4h2v2h-2z"></path>
+            </svg>
+          </div>
+          <p className="text-red-500 text-sm max-w-md text-center">
+            Something went wrong, most probably your token is expired, log in so
+            you can keep using our app{" "}
+            <Link to="/login" className="text-sm underline text-red-500">
+              go back to log in.
+            </Link>
+          </p>
+        </div>
       ) : notifications.notifications.length === 0 ? (
         <div className="h-full flex flex-col items-center justify-center">
           <svg

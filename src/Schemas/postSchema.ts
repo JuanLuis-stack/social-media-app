@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 
-const postSchema = z.object({
+export const postSchema = z.object({
   id: z.number(),
   title: z.string(),
   content: z.string(),
@@ -14,6 +14,20 @@ const postSchema = z.object({
   comments: z.string(),
   name: z.string(),
   liked_by_current_user: z.boolean(),
+});
+
+export const createPostSchema = z.object({
+  message: z.string(),
+  post: z.object({
+    id: z.number(),
+    title: z.string(),
+    content: z.string(),
+    created_at: z.string(),
+    user_name: z.string(),
+    user_id: z.number(),
+    media_url: z.string().nullable(),
+    media_type: z.string().nullable(),
+  }),
 });
 
 export const postRetrivedSchema = z.object({

@@ -1,5 +1,5 @@
 import { useAuth } from "../context/AuthContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useUserProfile from "../hooks/useUserProfile";
 import { Column } from "../context/ColumnContext";
 import GoBackArrow from "../components/GoBackArrow";
@@ -11,7 +11,29 @@ function Profile() {
   const { loading, mainUserProfile, userProfile } = useUserProfile(user_name);
 
   if (!userProfile || userProfile.user_name === null)
-    return <p className="text-red-500 font-bold">Something went wrong</p>;
+    return (
+      <div className="h-screen w-full flex flex-col items-center justify-center px-10  md:px-20">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100"
+            height="100"
+            fill="#f11"
+            viewBox="0 0 24 24"
+          >
+            <path d="m20.42 6.11-7.97-4c-.28-.14-.62-.14-.9 0l-7.97 4c-.31.15-.51.45-.55.79-.01.11-.96 10.76 8.55 15.01a.98.98 0 0 0 .82 0C21.91 17.66 20.97 7 20.95 6.9a.98.98 0 0 0-.55-.79ZM12 19.9C5.26 16.63 4.94 9.64 5 7.64l7-3.51 7 3.51c.04 1.99-.33 9.02-7 12.26"></path>
+            <path d="M11 11h2v6h-2zm0-4h2v2h-2z"></path>
+          </svg>
+        </div>
+        <p className="text-red-500 text-sm max-w-md text-center">
+          Something went wrong, most probably your token is expired, log in so
+          you can keep using our app{" "}
+          <Link to="/login" className="text-sm underline text-red-500">
+            go back to log in.
+          </Link>
+        </p>
+      </div>
+    );
 
   if (loading) return <p>loading...</p>;
 

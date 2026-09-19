@@ -42,8 +42,12 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
   return (
     <>
       <button
-        className="ml-2 p-1 px-4 bg-linear-to-tl from-[#fff1] to-[#fff14] rounded-xl cursor-pointer"
-        onClick={() => setMenuVisible(true)}
+        id="NotificationTypeMenuBtn"
+        className={`ml-2 p-1 px-6 bg-linear-to-tl from-[#fff1] to-[#fff14] rounded-xl cursor-pointer hover:opacity-45 duration-300 ${animate === "NotificationTypeMenuBtn" && `animate-[spanIn_400ms_ease]`}`}
+        onClick={() => {
+          activeAnimation("NotificationTypeMenuBtn");
+          setMenuVisible(true);
+        }}
       >
         {notificationType}
       </button>

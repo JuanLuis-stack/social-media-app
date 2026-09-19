@@ -3,7 +3,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
-import Settings from "./components/Settings";
+import Settings from "./pages/Settings";
 import Home from "./pages/Home";
 import Layout from "./layouts/DasboardLayout";
 import Login from "./pages/Login";
