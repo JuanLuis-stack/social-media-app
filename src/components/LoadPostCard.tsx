@@ -2,7 +2,7 @@ import type React from "react";
 import Overlay from "./Overlay";
 import { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { postRetrivedSchema, type SubmitPostType } from "../Schemas/postSchema";
+import { createPostSchema, type SubmitPostType } from "../Schemas/postSchema";
 import { submitPost } from "../services/postsService";
 import { UseAnimation } from "../context/AnimationContext";
 import { UsePostContext } from "../context/PostContext";
@@ -92,42 +92,48 @@ function LoadPostCard() {
   async function handleSubmit(
     event:
       | React.ChangeEvent<HTMLFormElement>
-      | React.MouseEvent<HTMLButtonElement>,
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLElement>,
   ) {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const { title, content } = post;
+      const { title, content } = post;
 
-    if (!title || !content) {
-      setError(true);
+      if (!title || !content) {
+        setError(true);
 
-      setTimeout(() => {
-        setError(false);
-      }, 2000);
-      return;
+        setTimeout(() => {
+          setError(false);
+        }, 2000);
+        return;
+      }
+      const token = loggedUser?.token;
+
+      if (!token) return;
+
+      const formData = new FormData();
+
+      formData.append("title", post.title);
+      formData.append("content", post.content);
+      if (post.media) {
+        formData.append("media", post.media);
+      }
+
+      const response = await submitPost(token, formData);
+      console.log(response);
+      createPostSchema.parse(response);
+
+      loadPosts();
+
+      closePreview();
+      closeSubmitPost();
+    } catch (error) {
+      console.log(error);
     }
-    const token = loggedUser?.token;
-
-    if (!token) return;
-
-    const formData = new FormData();
-
-    formData.append("title", post.title);
-    formData.append("content", post.content);
-    if (post.media) {
-      formData.append("media", post.media);
-    }
-
-    const response = await submitPost(token, formData);
-    postRetrivedSchema.parse(response);
-
-    loadPosts();
-
-    closePreview();
-    closeSubmitPost();
   }
 
-  function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLElement>) {
     if (event.key === "Enter") {
       event.preventDefault();
       handleSubmit(event);
@@ -135,7 +141,7 @@ function LoadPostCard() {
   }
 
   function closePreview() {
-    if (!inputFileRef.current) return;
+    if (!inputFileRef.current || !previewMedia.URL) return;
     URL.revokeObjectURL(previewMedia.URL);
 
     setPreviewMedia({
@@ -156,18 +162,18 @@ function LoadPostCard() {
 
   return (
     <Overlay closerFunction={closeSubmitPost}>
-      <div className="flex w-full h-full flex-col px-5 py-2 md:p-0 bg-[#101010] z-10 md:w-2/4 md:max-h-[85%] md:h-auto md:border border-white/30 md:rounded-2xl md:bg-black/2 md:backdrop-blur-xl animate-[fadeIn_500ms_ease-out]">
-        <header className="flex justify-center relative md:border-b border-white/30 p-2 text-white pb-5">
+      <div className="flex w-full h-full flex-col px-5 py-2 md:p-0 bg-[#101010] z-10 md:min-w-120 md:w-xl md:max-h-[85%] md:h-auto md:border-t md:border-t-white/10 md:border-l md:border-l-white/10 md:rounded-2xl md:bg-black/2 md:bg-linear-to-tr from-[#111] to-[#171717] animate-[fadeIn_500ms_ease-out]">
+        <header className="relative flex justify-center items-center md:h-full md:border-b border-white/10 p-4 text-white">
           <button
             onClick={closeSubmitPost}
-            className="absolute left-2 font-semibold cursor-pointer text-gray-400 hover:text-white rounded-md duration-150"
+            className="absolute left-2 font-semibold cursor-pointer text-gray-400 hover:text-white rounded-md duration-150 over w-18 truncate"
           >
             Cancelar
           </button>
           <p className="font-bold">Nuevo Post</p>
         </header>
-        <div className="relative flex-1 overflow-y-auto custom-scrollbar">
-          <div className="flex flex-1 p-2">
+        <div className="relative flex-1 overflow-y-auto custom-scrollbar px-2">
+          <div className="flex flex-1 p-2 flex-wrap">
             <img
               src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
               alt=""
@@ -234,7 +240,7 @@ function LoadPostCard() {
           </div>
           {previewMedia.URL && (
             <div className="p-2 relative w-fit">
-              <div className="absolute top-2 left-2 p-1 backdrop-blur-2xl bg-black/30 rounded-br-2xl rounded-tl-2xl opacity-20 hover:opacity-100 duration-200">
+              <div className="max-w-[70%] absolute top-2 left-2 p-1 backdrop-blur-2xl bg-black/30 rounded-br-2xl rounded-tl-2xl opacity-20 hover:opacity-100 duration-200">
                 <p className="text-sm">{previewMedia.name}</p>
                 <p className="text-sm">{previewMedia.size}</p>
               </div>
@@ -274,18 +280,31 @@ function LoadPostCard() {
         </div>
 
         <footer className="flex justify-between p-2 h-13 w-full">
-          <p
-            className={`font-semiold ${error ? "text-red-500" : "text-transparent"} duration-500`}
-          >
-            Debes de llenar todos campos
-          </p>
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="#f11"
+              viewBox="2 2 20 20"
+              className={`${error ? "block" : "hidden"}`}
+            >
+              <path d="M11 7h2v6h-2zm0 8h2v2h-2z"></path>
+              <path d="M12 22c5.51 0 10-4.49 10-10S17.51 2 12 2 2 6.49 2 12s4.49 10 10 10m0-18c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8"></path>
+            </svg>
+            <p
+              className={`font-semibold pl-2 ${error ? "text-red-500" : "text-transparent"} duration-500`}
+            >
+              Debes de llenar todos campos
+            </p>
+          </div>
           <button
             id={"submitPost"}
             onClick={(e) => {
               handleSubmit(e);
               activeAnimation("submitPost");
             }}
-            className={`bg-[#777] hover:bg-[#eee] md:hover:bg text-black/60 md:bg-black/10 md:hover:bg-black/30 md:text-white md:border-[1.5px] md:border-white/25 cursor-pointer duration-150 rounded-2xl px-2 p-1 
+            className={`bg-[#777] hover:bg-[#eee] md:hover:bg text-black/60 md:bg-black/10 md:hover:bg-black/30 md:text-white/70 md:border-[1.5px] md:border-white/25 cursor-pointer font-semibold duration-150 rounded-xl px-4 p-1 
             ${animate === "submitPost" && "animate-[spanIn_400ms_ease]"}`}
           >
             Publicar

@@ -4,7 +4,7 @@ import { UseNotifications } from "../context/NotificationsContext";
 import { useDismissMenu } from "../hooks/useDismissMenu";
 import { UseColumnNavigation } from "../context/ColumnNavigationContext";
 
-function CloseNotificationMenu() {
+function CloseNotificationColumn() {
   const { animate, activeAnimation } = UseAnimation();
   const { onUnNotificationColumnVisible } = UseNotifications();
   const { removeColumn } = UseColumnNavigation();
@@ -73,4 +73,4 @@ function CloseNotificationMenu() {
   );
 }
 
-export default CloseNotificationMenu;
+export default CloseNotificationColumn;

@@ -37,7 +37,7 @@ function UnfollowConfirmation({
   return createPortal(
     <Overlay closerFunction={onCancel}>
       <div
-        className={`w-66 ${error ? "h-55" : "h-47"} animate-[fadeIn_400ms_ease] backdrop-blur-2xl border rounded-2xl border-[#333] border-l-white/30 border-t-white/30 relative`}
+        className={`w-66 ${error ? "h-55" : "h-47"} animate-[fadeIn_400ms_ease] bg-linear-to-tr from-[#111] via-[#181818] to-[#111] border rounded-2xl border-[#333] border-l-white/20 border-t-white/20 relative`}
       >
         <div className="w-full h-fit flex flex-col justify-center items-center px-5 pt-2">
           <img
@@ -54,10 +54,10 @@ function UnfollowConfirmation({
             </p>
           )}
         </div>
-        <div className="w-full flex justify-between mt-4 absolute bottom-0">
+        <div className="w-full h-12 flex justify-between absolute bottom-0">
           <button
             disabled={loading}
-            className="w-[50%] hover:opacity-60 duration-200 text-white text-sm font-bold py-4 border-t-[0.5px]  border-r-[0.5px] cursor-pointer border-white/20"
+            className="w-[50%] flex items-center justify-center hover:opacity-60 duration-200 text-white text-sm py-4 border-t-[0.5px] border-r-[0.5px] cursor-pointer border-white/20"
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               e.preventDefault();
@@ -68,7 +68,7 @@ function UnfollowConfirmation({
           </button>
           <button
             disabled={loading}
-            className="w-[50%] hover:opacity-60 duration-200 font-bold py-4 border-t-[0.5px] cursor-pointer border-white/20 text-red-500 text-sm"
+            className="w-[50%] flex items-center justify-center hover:opacity-60 duration-200 font-bold py-4 border-t-[0.5px] cursor-pointer border-white/20 text-red-500 text-sm"
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               handleOnConfirm(e);

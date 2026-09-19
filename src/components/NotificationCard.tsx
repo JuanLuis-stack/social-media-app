@@ -157,7 +157,7 @@ function NotificationCard({ notification }: { notification: Notification }) {
       <div className="w-full h-full py-3 border-b border-white/15">
         {" "}
         <div>
-          <div className="flex">
+          <div className="flex flex-wrap">
             <UserName user_name={currentUser.user_name}></UserName>
             <p className="pl-2">{setTimeAgo(notification.created_at)}</p>
           </div>
@@ -210,7 +210,7 @@ function NotificationCard({ notification }: { notification: Notification }) {
       <div className="w-full h-full py-3 border-b border-white/15">
         {" "}
         <div>
-          <div className="flex">
+          <div className="flex flex-wrap">
             <UserName user_name={currentUser.user_name}></UserName>
             <p className="pl-2">{setTimeAgo(notification.created_at)}</p>
           </div>
@@ -262,7 +262,7 @@ function NotificationCard({ notification }: { notification: Notification }) {
       <div className="w-full h-full py-3 border-b border-white/15">
         {" "}
         <div>
-          <div className="flex">
+          <div className="flex flex-wrap">
             <UserName user_name={currentUser.user_name}></UserName>
             <p className="pl-2 text-sm">
               {setTimeAgo(notification.created_at)}

@@ -8,7 +8,7 @@ import RenderNotifications from "../components/RenderNotifications";
 import { UseNotifications } from "../context/NotificationsContext";
 import NotificationsTypeMenu from "../components/NotificationsTypeMenu";
 import AddColumnMenu from "../components/AddColumnMenu";
-import CloseNotificationMenu from "../components/CloseNotificationMenu";
+import CloseNotificationColumn from "../components/CloseNotificationColumn";
 import { Column } from "../context/ColumnContext";
 import { UseColumnNavigation } from "../context/ColumnNavigationContext";
 import GoBackArrow from "../components/GoBackArrow";
@@ -96,7 +96,7 @@ function Home() {
                   </div>
                 )}
               </div>
-              <CloseNotificationMenu></CloseNotificationMenu>
+              <CloseNotificationColumn></CloseNotificationColumn>
             </div>
             <div className="h-[87%] w-full md:rounded-t-3xl overflow-hidden">
               {!secondHistory ? (

@@ -25,7 +25,7 @@ function UserName({ user_name }: { user_name: string }) {
         }
       }}
       className="font-semibold text-white hover:underline relative"
-      onMouseEnter={() => setIsVisible(false)}
+      onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
     >
       {user_name}

@@ -23,7 +23,7 @@ function SubmitterPostCard() {
             placeholder="¿Qué hay de nuevo?"
           />
         </div>
-        <button className="border-[1.3px] border-black-100 p-1.5 rounded-md cursor-pointer hover:opacity-50 duration-200">
+        <button className="border-[1.3px] border-white/25 px-4 p-1.5 font-semibold text-sm text-white rounded-xl cursor-pointer hover:opacity-50 duration-200">
           Publicar
         </button>
       </div>
