@@ -8,9 +8,10 @@ import VideoPlayer from "./VideoPlayer";
 import ImagePlayer from "./ImagePlayer";
 import FollowCard from "./FollowCard";
 import { UseFollowProvider } from "../context/FollowContext";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import UserName from "./UserName";
 import ActionPostButtons from "./ActionPostButtons";
+import { UseColumn } from "../context/ColumnContext";
 
 type RenderPostProps = {
   post: Post;
@@ -21,12 +22,13 @@ function PostCard({ post, onUpdatedPost }: RenderPostProps) {
   const { loggedUser } = useAuth();
   const [isFollowCardVisible, setIsFollowCardVisible] = useState(false);
   const { isFollowing } = UseFollowProvider();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const { openPostDetail } = UseColumn();
 
   return (
     <div
       className="@container flex border-b border-white/20 px-4 my-3"
-      onClick={() => navigate(`/${post.user_name}/posts/${post.id}`)}
+      onClick={() => openPostDetail(post.user_name, post.id)}
     >
       <div
         className="group relative h-7"

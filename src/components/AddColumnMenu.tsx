@@ -2,10 +2,12 @@ import { useRef, useState } from "react";
 import { UseAnimation } from "../context/AnimationContext";
 import { UseNotifications } from "../context/NotificationsContext";
 import { useDismissMenu } from "../hooks/useDismissMenu";
+import { UseColumnNavigation } from "../context/ColumnNavigationContext";
 
 function AddColumnMenu() {
   const { animate, activeAnimation } = UseAnimation();
   const { onNotificationColumnVisible } = UseNotifications();
+  const { addColumn } = UseColumnNavigation();
   const notificationMenuRef = useRef<HTMLDivElement | null>(null);
 
   const [notificationsMenuVisible, setNotificationsMenuVisible] =
@@ -45,6 +47,7 @@ function AddColumnMenu() {
               activeAnimation("openNotificationsColumn");
               onNotificationColumnVisible();
               setNotificationsMenuVisible(false);
+              addColumn("activity");
             }}
           >
             <p>actividad</p>

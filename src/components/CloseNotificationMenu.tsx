@@ -1,12 +1,15 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { UseAnimation } from "../context/AnimationContext";
 import { UseNotifications } from "../context/NotificationsContext";
 import { useDismissMenu } from "../hooks/useDismissMenu";
+import { UseColumnNavigation } from "../context/ColumnNavigationContext";
 
 function CloseNotificationMenu() {
   const { animate, activeAnimation } = UseAnimation();
-  const onNotificationMenuRef = useRef<HTMLDivElement | null>(null);
   const { onUnNotificationColumnVisible } = UseNotifications();
+  const { removeColumn } = UseColumnNavigation();
+
+  const onNotificationMenuRef = useRef<HTMLDivElement | null>(null);
   const [unNotificationsMenuVisible, setUnNotificationsMenuVisible] =
     useState(false);
 
@@ -26,7 +29,8 @@ function CloseNotificationMenu() {
         fill="currentColor"
         viewBox="0 0 24 24"
         className={`cursor-pointer hover:bg-white/20 h-8 w-8 p-1 rounded-full hover:scale-107 duration-300 ${animate === "closeNotifications-menuIcon" && "animate-[spanIn_400ms_ease]"}`}
-        onClick={() => {
+        onClick={(e: React.MouseEvent<SVGSVGElement>) => {
+          e.stopPropagation();
           setUnNotificationsMenuVisible(true);
           activeAnimation("closeNotifications-menuIcon");
         }}
@@ -42,10 +46,12 @@ function CloseNotificationMenu() {
           <button
             id="CloseNotificationsColumn"
             className={`cursor-pointer rounded-md px-2 p-2 w-[95%] text-white font-semibold text-start text-xs hover:bg-white/3 flex justify-between items-center ${animate === "CloseNotificationsColumn" && "animate-[spanIn_400ms_ease]"}`}
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
               activeAnimation("CloseNotificationsColumn");
               onUnNotificationColumnVisible();
               setUnNotificationsMenuVisible(false);
+              removeColumn("activity");
             }}
           >
             <p>Suprimir columna</p>

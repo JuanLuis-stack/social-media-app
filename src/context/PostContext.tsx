@@ -10,6 +10,7 @@ import {
   getComments,
   getPostById,
   getPosts,
+  getPostsByUserName,
   likePost,
 } from "../services/postsService";
 import { renderCommentsSchema, type Comments } from "../Schemas/commentSchema";
@@ -26,6 +27,7 @@ type PostContextType = {
     post: Post,
     onUpdatedPost?: (updatedPost: Post) => void,
   ) => Promise<void>;
+  retrievePostsByUserName: (user_name: string) => Promise<Posts | undefined>;
 };
 
 const PostContext = createContext<PostContextType | null>(null);
@@ -111,6 +113,19 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
     onUpdatedPost?.(updatedPost);
   }
 
+  async function retrievePostsByUserName(user_name: string) {
+    if (!loggedUser) return;
+    if (!user_name) return;
+    try {
+      const response = await getPostsByUserName(loggedUser.token, user_name);
+
+      const data = postsRetrivedSchema.parse(response);
+      return data.posts;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     loadPosts();
   }, [loggedUser]);
@@ -124,6 +139,7 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
         getPostById: retrievePostById,
         getCommentsByUserId,
         likeEvent,
+        retrievePostsByUserName,
       }}
     >
       {children}

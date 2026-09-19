@@ -46,3 +46,14 @@ export async function deleteNotificationById(token: string, id: number) {
 
   return response;
 }
+export async function readNotification(token: string, id: number) {
+  const response = await api(`/notifications/${id}/read`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+}

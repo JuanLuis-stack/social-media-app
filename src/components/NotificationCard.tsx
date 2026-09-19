@@ -8,12 +8,17 @@ import setTimeAgo from "../utils/setTimeAgo";
 import { type Post } from "../Schemas/postSchema";
 import { UsePostContext } from "../context/PostContext";
 import ActionPostButtons from "./ActionPostButtons";
-import DeleteNotificationMenu from "./DeleteNotificationMenu";
+import NotificationMenu from "./NotificationMenu";
+import { UseColumn } from "../context/ColumnContext";
+import { UseNotifications } from "../context/NotificationsContext";
 
 function NotificationCard({ notification }: { notification: Notification }) {
   const { type, actor_id } = notification;
   const { loggedUser } = useAuth();
   const { getPostById } = UsePostContext();
+  const { openPostDetail, openProfile } = UseColumn();
+  const { readNotificationAction } = UseNotifications();
+
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [currentPost, setCurrentPost] = useState<Post | null>(null);
 
@@ -33,7 +38,7 @@ function NotificationCard({ notification }: { notification: Notification }) {
   }, [loggedUser, actor_id]);
 
   useEffect(() => {
-    if (notification.type !== "new_post") return;
+    if (notification.type === "follow") return;
 
     async function retrievePostById() {
       if (notification.post_id === null) return;
@@ -49,7 +54,16 @@ function NotificationCard({ notification }: { notification: Notification }) {
   if (!currentUser) return null;
 
   return type === "new_post" ? (
-    <div className="flex">
+    <div
+      className="flex"
+      onClick={() => {
+        if (currentPost) {
+          openPostDetail(currentPost?.user_name, currentPost?.id);
+        }
+        readNotificationAction(notification.id);
+      }}
+      id={String(notification.id)}
+    >
       <div className="group relative h-7 p-3">
         <img
           src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
@@ -71,7 +85,7 @@ function NotificationCard({ notification }: { notification: Notification }) {
       <div className="w-full h-full pt-3 border-b border-white/15">
         {" "}
         <div>
-          <div className="flex">
+          <div className="flex flex-wrap">
             <UserName user_name={currentUser.user_name}></UserName>
             <p className="pl-2">{setTimeAgo(notification.created_at)}</p>
           </div>
@@ -102,7 +116,10 @@ function NotificationCard({ notification }: { notification: Notification }) {
       </div>
       <div className="w-[20%] pt-5 flex flex-col items-center justify-center relative">
         <div className="absolute top-1">
-          <DeleteNotificationMenu id={notification.id}></DeleteNotificationMenu>
+          <NotificationMenu
+            id={notification.id}
+            is_read={notification.is_read}
+          ></NotificationMenu>
         </div>
         {!notification.is_read && (
           <div className="bg-green-500 w-2 h-2 rounded-full"></div>
@@ -110,7 +127,14 @@ function NotificationCard({ notification }: { notification: Notification }) {
       </div>
     </div>
   ) : type === "follow" ? (
-    <div className="flex">
+    <div
+      className="flex"
+      onClick={() => {
+        openProfile(currentUser.user_name);
+        readNotificationAction(notification.id);
+      }}
+      id={String(notification.id)}
+    >
       <div className="group relative h-7 p-3">
         <img
           src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
@@ -144,7 +168,10 @@ function NotificationCard({ notification }: { notification: Notification }) {
       </div>
       <div className="w-[20%] pt-5 flex flex-col items-center justify-center relative">
         <div className="absolute top-1">
-          <DeleteNotificationMenu id={notification.id}></DeleteNotificationMenu>
+          <NotificationMenu
+            id={notification.id}
+            is_read={notification.is_read}
+          ></NotificationMenu>
         </div>
         {!notification.is_read && (
           <div className="bg-green-500 w-2 h-2 rounded-full"></div>
@@ -152,7 +179,16 @@ function NotificationCard({ notification }: { notification: Notification }) {
       </div>
     </div>
   ) : type === "comment" ? (
-    <div className="flex">
+    <div
+      className="flex"
+      onClick={() => {
+        if (currentPost) {
+          openPostDetail(currentPost?.user_name, currentPost?.id);
+        }
+        readNotificationAction(notification.id);
+      }}
+      id={String(notification.id)}
+    >
       <div className="group relative h-7 p-3">
         <img
           src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
@@ -185,7 +221,10 @@ function NotificationCard({ notification }: { notification: Notification }) {
       </div>
       <div className="w-[20%] pt-5 flex flex-col items-center justify-center relative">
         <div className="absolute top-1">
-          <DeleteNotificationMenu id={notification.id}></DeleteNotificationMenu>
+          <NotificationMenu
+            id={notification.id}
+            is_read={notification.is_read}
+          ></NotificationMenu>
         </div>
         {!notification.is_read && (
           <div className="bg-green-500 w-2 h-2 rounded-full"></div>
@@ -193,7 +232,16 @@ function NotificationCard({ notification }: { notification: Notification }) {
       </div>
     </div>
   ) : type === "like" ? (
-    <div className="flex">
+    <div
+      className="flex"
+      onClick={() => {
+        if (currentPost) {
+          openPostDetail(currentPost?.user_name, currentPost?.id);
+        }
+        readNotificationAction(notification.id);
+      }}
+      id={String(notification.id)}
+    >
       <div className="group relative h-7 p-3">
         <img
           src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
@@ -227,7 +275,10 @@ function NotificationCard({ notification }: { notification: Notification }) {
       </div>
       <div className="w-[20%] pt-5 flex flex-col items-center justify-center relative">
         <div className="absolute top-1">
-          <DeleteNotificationMenu id={notification.id}></DeleteNotificationMenu>
+          <NotificationMenu
+            id={notification.id}
+            is_read={notification.is_read}
+          ></NotificationMenu>
         </div>
         {!notification.is_read && (
           <div className="bg-green-500 w-2 h-2 rounded-full"></div>

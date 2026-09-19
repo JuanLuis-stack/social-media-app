@@ -72,7 +72,7 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
           />
         </div>
         <form
-          className="w-svh h-auto flex flex-1 rounded-xl"
+          className="w-full h-auto flex flex-1 rounded-xl"
           onSubmit={handleSubmit}
         >
           <textarea

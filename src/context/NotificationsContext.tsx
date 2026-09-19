@@ -9,6 +9,7 @@ import {
   getUnreadUserNotifications,
   getUserNotifications,
   getUserNotificationsByType,
+  readNotification,
 } from "../services/notificationService";
 import { useAuth } from "./AuthContext";
 
@@ -30,6 +31,7 @@ type NotificationContextType = {
   onUnNotificationColumnVisible: () => void;
   isNotificationColumnVisible: boolean;
   deleteNotification: (id: number) => Promise<void>;
+  readNotificationAction: (id: number) => Promise<void>;
 };
 
 const NotificationContext = createContext<NotificationContextType | null>(null);
@@ -123,6 +125,7 @@ export function NotificationProvider({
       if (notifications === null) return;
 
       await deleteNotificationById(loggedUser?.token, id);
+
       setNotifications((prev) => {
         if (!prev.notifications) return prev;
 
@@ -135,6 +138,38 @@ export function NotificationProvider({
       });
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async function readNotificationAction(id: number) {
+    try {
+      if (!loggedUser?.token) return;
+
+      await readNotification(loggedUser.token, id);
+
+      setNotifications((prev) => {
+        if (!prev.notifications) return prev;
+
+        if (notifications.type === "un_read") {
+          return {
+            ...prev,
+            notifications: prev.notifications.filter(
+              (notification) => notification.id !== id,
+            ),
+          };
+        }
+
+        return {
+          ...prev,
+          notifications: prev.notifications.map((notification) =>
+            notification.id === id
+              ? { ...notification, is_read: true }
+              : notification,
+          ),
+        };
+      });
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -155,6 +190,7 @@ export function NotificationProvider({
         onUnNotificationColumnVisible,
         isNotificationColumnVisible: activeNotificationsColumn,
         deleteNotification,
+        readNotificationAction,
       }}
     >
       {children}

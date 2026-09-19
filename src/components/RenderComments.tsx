@@ -13,11 +13,11 @@ function RenderComments({ comments }: CommentsProp) {
         key={comment.id}
         className="w-full border-t border-[#333] my-2 flex p-3"
       >
-        <div className="w-10">
+        <div className="">
           <img
             src="https://marketplace.canva.com/N2Y1c/MAEbiyN2Y1c/1/tl/canva-user-profile-avatar-MAEbiyN2Y1c.png"
             alt=""
-            className="h-7 min-w-7 rounded-full mr-2 items-bottom"
+            className="h-9 min-w-7 rounded-full mr-4 items-bottom"
           />
         </div>
         <div>
