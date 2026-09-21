@@ -11,7 +11,7 @@ function Activity() {
           <div className="flex w-full justify-between items-center h-[10%] pt-3 pl-2 max-md:pb-4">
             <div className="flex items-center justify-between w-full mr-5 relative">
               <p className="font-semibold text-start text-xl text-white cursor-pointer">
-                Actividad
+                Activity
               </p>
               <NotificationsTypeMenu isPage={true}></NotificationsTypeMenu>
             </div>

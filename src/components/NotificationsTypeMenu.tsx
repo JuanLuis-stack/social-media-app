@@ -20,17 +20,17 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
 
   const notificationType =
     type === "all"
-      ? "Todo"
+      ? "All"
       : type === "comment"
-        ? "Comentarios"
+        ? "Comments"
         : type === "like"
-          ? "Me gustas"
+          ? "Likes"
           : type === "new_post"
-            ? "Publicaciones"
+            ? "Publications"
             : type === "un_read"
-              ? "No leidos"
+              ? "UnRead"
               : type === "follow"
-                ? "Seguidores"
+                ? "Follows"
                 : "something ";
 
   useDismissMenu({
@@ -66,8 +66,8 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
               if (isPage) navigate(`/activity/all`);
             }}
           >
-            Todo{" "}
-            {notificationType === "Todo" && (
+            All{" "}
+            {type === "all" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -88,8 +88,8 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
               if (isPage) navigate(`/activity/un_read`);
             }}
           >
-            No leidos{" "}
-            {notificationType === "No leidos" && (
+            Unread{" "}
+            {type === "un_read" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -110,8 +110,8 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
               if (isPage) navigate(`/activity/like`);
             }}
           >
-            Me gustas{" "}
-            {notificationType === "Me gustas" && (
+            Likes{" "}
+            {type === "like" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -132,8 +132,8 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
               if (isPage) navigate(`/activity/comment`);
             }}
           >
-            Comentados{" "}
-            {notificationType === "Comentarios" && (
+            Comments{" "}
+            {type === "comment" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -154,8 +154,8 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
               if (isPage) navigate(`/activity/new_post`);
             }}
           >
-            Publicaciones{" "}
-            {notificationType === "Publicaciones" && (
+            New publications{" "}
+            {type === "new_post" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -176,8 +176,8 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
               if (isPage) navigate(`/activity/follow`);
             }}
           >
-            Seguidores{" "}
-            {notificationType === "Seguidores" && (
+            New followers{" "}
+            {type === "follow" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

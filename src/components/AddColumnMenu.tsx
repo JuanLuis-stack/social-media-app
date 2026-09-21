@@ -39,7 +39,7 @@ function AddColumnMenu() {
           className="absolute right-7 top-14 bg-linear-to-tr from-[#111] via-[#191919] to-[#111] border-t border-l rounded-xl border-l-white/25 border-t-white/25 w-50 flex flex-col justify-start items-start px-1 p-1"
           ref={notificationMenuRef}
         >
-          <p className="text-xs text-white/30 p-1 pb-2">Añadir columna</p>
+          <p className="text-xs text-white/30 p-1 pb-2">Add column</p>
           <button
             id="openNotificationsColumn"
             className={`cursor-pointer rounded-xl p-2 w-full text-white font-semibold text-start text-xs hover:bg-white/3 flex justify-between items-center ${animate === "openNotificationsColumn" && "animate-[spanIn_400ms_ease]"}`}
@@ -50,7 +50,7 @@ function AddColumnMenu() {
               addColumn("activity");
             }}
           >
-            <p>actividad</p>
+            <p>Activity</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

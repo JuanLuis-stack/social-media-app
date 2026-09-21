@@ -39,7 +39,7 @@ function UserProfileMiniCard({
           <div className="w-full flex pt-2">
             {mainUserProfile ? (
               <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-full text-white text-sm font-semibold cursor-pointer hover:opacity-70">
-                ver mi perfil
+                View my profile
               </button>
             ) : (
               <div className="h-8 w-full flex">
@@ -51,7 +51,7 @@ function UserProfileMiniCard({
                   onConfirmationComplete={onCloseMiniProfileCard}
                 ></FollowButton>
                 <button className="border border-white/30 rounded-xl px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-xs font-semibold cursor-pointer hover:opacity-70 ">
-                  Enviar mensage
+                  Send message
                 </button>
               </div>
             )}

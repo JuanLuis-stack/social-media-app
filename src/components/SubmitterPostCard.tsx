@@ -20,11 +20,11 @@ function SubmitterPostCard() {
           <input
             className="placeholder:text-sm focus:outline-none"
             readOnly
-            placeholder="¿Qué hay de nuevo?"
+            placeholder="What's new?"
           />
         </div>
         <button className="border-[1.3px] border-white/25 px-4 p-1.5 font-semibold text-sm text-white rounded-xl cursor-pointer hover:opacity-50 duration-200">
-          Publicar
+          Post
         </button>
       </div>
     </>
