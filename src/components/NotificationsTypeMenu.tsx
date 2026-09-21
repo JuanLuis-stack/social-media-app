@@ -43,7 +43,7 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
     <>
       <button
         id="NotificationTypeMenuBtn"
-        className={`ml-2 p-1 px-6 bg-linear-to-tl from-[#fff1] to-[#fff14] rounded-xl cursor-pointer hover:opacity-45 duration-300 ${animate === "NotificationTypeMenuBtn" && `animate-[spanIn_400ms_ease]`}`}
+        className={`ml-2 p-1 px-6 bg-white/3 rounded-xl cursor-pointer hover:opacity-45 duration-300 ${animate === "NotificationTypeMenuBtn" && `animate-[spanIn_400ms_ease]`}`}
         onClick={() => {
           activeAnimation("NotificationTypeMenuBtn");
           setMenuVisible(true);
@@ -54,7 +54,7 @@ function NotificationsTypeMenu({ isPage }: { isPage?: boolean }) {
       {menuIsVisible && (
         <div
           id="notificationTypeMenu"
-          className={`absolute right-6 top-8 bg-linear-to-tl from-[#191919] to-[#161616] rounded-xl w-50 flex flex-col justify-center items-center p-1 py-2 gap-2 z-50 animate-[fadeIn_400ms_ease]`}
+          className={`absolute right-6 top-8 bg-linear-to-tl from-[#171717] to-[#141414] rounded-xl w-50 flex flex-col justify-center items-center p-1 py-2 gap-2 z-50 animate-[fadeIn_400ms_ease]`}
           ref={menuBtnRef}
         >
           <button

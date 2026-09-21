@@ -30,7 +30,7 @@ function NotificationMenu({ id, is_read }: { id: number; is_read: boolean }) {
       </button>
       {menuVisible && (
         <div
-          className="absolute right-6 top-6 z-10 gap-1 px-1 bg-linear-to-tl from-[#171717] to-[#222] rounded-xl w-50 flex flex-col justify-center items-center h-fit py-2"
+          className="absolute right-6 top-6 z-10 gap-1 px-1 bg-[#191919] rounded-2xl w-50 flex flex-col justify-center items-center h-fit py-2"
           ref={onNotificationMenuRef}
         >
           {!is_read && (

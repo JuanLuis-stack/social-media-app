@@ -16,7 +16,7 @@ type PreviewMedia = {
 };
 
 const textareaStyle =
-  "max-h-45 w-full bg-gray-500/10 rounded-md overflow-y-auto resize-none custom-scrollbar focus:outline-none p-1 placeholder:text-sm";
+  "max-h-45 w-full bg-white/2 rounded-md overflow-y-auto resize-none custom-scrollbar focus:outline-none p-1 placeholder:text-sm";
 
 function LoadPostCard() {
   const { isSubmitPostOpen, closeSubmitPost } = UseSubmitterPost();
@@ -162,15 +162,15 @@ function LoadPostCard() {
 
   return (
     <Overlay closerFunction={closeSubmitPost}>
-      <div className="flex w-full h-full flex-col px-5 py-2 md:p-0 bg-[#101010] z-10 md:min-w-120 md:w-xl md:max-h-[85%] md:h-auto md:border-t md:border-t-white/10 md:border-l md:border-l-white/10 md:rounded-2xl md:bg-black/2 md:bg-linear-to-tr from-[#111] to-[#171717] animate-[fadeIn_500ms_ease-out]">
-        <header className="relative flex justify-center items-center md:h-full md:border-b border-white/10 p-4 text-white">
+      <div className="flex w-full h-full flex-col px-5 py-2 md:p-0 bg-[#101010] z-10 md:min-w-120 md:w-xl md:max-h-[85%] md:h-auto bg-linear-to-tr from-[#111] via-[#191919] to-[#111] md:border-t md:border-l md:rounded-2xl border-l-white/25 border-t-white/25 animate-[fadeIn_500ms_ease-out]">
+        <header className="relative flex justify-center items-center md:h-full md:border-b border-white/10 px-4 py-3 text-white">
           <button
             onClick={closeSubmitPost}
-            className="absolute left-2 font-semibold cursor-pointer text-gray-400 hover:text-white rounded-md duration-150 over w-18 truncate"
+            className="absolute left-2 font-semibold cursor-pointer text-gray-400 hover:text-white rounded-md duration-150 over w-18 truncate text-sm"
           >
             Cancelar
           </button>
-          <p className="font-bold">Nuevo Post</p>
+          <p className="font-bold text-sm">Nuevo Post</p>
         </header>
         <div className="relative flex-1 overflow-y-auto custom-scrollbar px-2">
           <div className="flex flex-1 p-2 flex-wrap">
@@ -183,7 +183,7 @@ function LoadPostCard() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row justify-between px-2 py-2">
-              <label htmlFor="title" className="w-20 pb-2 md:pr-2">
+              <label htmlFor="title" className="w-20 pb-2 md:pr-2 text-sm">
                 Titulo:
               </label>
               <textarea
@@ -199,7 +199,7 @@ function LoadPostCard() {
               ></textarea>
             </div>
             <div className="flex flex-col md:flex-row justify-between px-2">
-              <label htmlFor="content" className="w-20 pb-2 md:pr-1">
+              <label htmlFor="content" className="w-20 pb-2 md:pr-1 text-sm">
                 contexto:
               </label>
               <textarea
@@ -304,7 +304,7 @@ function LoadPostCard() {
               handleSubmit(e);
               activeAnimation("submitPost");
             }}
-            className={`bg-[#777] hover:bg-[#eee] md:hover:bg text-black/60 md:bg-black/10 md:hover:bg-black/30 md:text-white/70 md:border-[1.5px] md:border-white/25 cursor-pointer font-semibold duration-150 rounded-xl px-4 p-1 
+            className={`bg-[#777] hover:bg-[#eee] md:hover:bg text-black/60 md:bg-black/10 md:hover:bg-black/30 md:text-white/70 md:border-[1.5px] md:border-white/25 cursor-pointer font-semibold duration-150 rounded-xl px-4 text-sm 
             ${animate === "submitPost" && "animate-[spanIn_400ms_ease]"}`}
           >
             Publicar
