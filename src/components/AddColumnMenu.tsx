@@ -36,7 +36,7 @@ function AddColumnMenu() {
       </svg>
       {notificationsMenuVisible && (
         <div
-          className="absolute right-7 top-14 bg-linear-to-tl from-[#191919] to-[#161616] rounded-xl w-50 flex flex-col justify-start items-start px-1 p-1"
+          className="absolute right-7 top-14 bg-linear-to-tr from-[#111] via-[#191919] to-[#111] border-t border-l rounded-xl border-l-white/25 border-t-white/25 w-50 flex flex-col justify-start items-start px-1 p-1"
           ref={notificationMenuRef}
         >
           <p className="text-xs text-white/30 p-1 pb-2">Añadir columna</p>

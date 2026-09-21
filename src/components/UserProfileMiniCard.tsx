@@ -17,7 +17,7 @@ function UserProfileMiniCard({
 
   return (
     <div
-      className={`w-73 max-h-70 min-h-40 animate-[fadeIn_400ms_ease] absolute ${cardPlacement === "above" ? "bottom-[55%] mb-2" : "top-full"} -left-6 z-10 bg-linear-to-tl from-[#111] to-[#151515] border rounded-2xl border-[#333] p-5`}
+      className={`w-73 max-h-70 min-h-40 animate-[fadeIn_400ms_ease] absolute ${cardPlacement === "above" ? "bottom-[55%] mb-2" : "top-full"} -left-6 z-10 bg-linear-to-tr from-[#111] via-[#191919] to-[#111] border-t border-l rounded-2xl border-l-white/25 border-t-white/25 p-5`}
     >
       {!userProfile ? (
         <div className="w-full h-full mt-6 flex flex-col justify-center items-center">

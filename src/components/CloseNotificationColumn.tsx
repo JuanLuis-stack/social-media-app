@@ -40,7 +40,7 @@ function CloseNotificationColumn() {
       </svg>
       {unNotificationsMenuVisible && (
         <div
-          className="absolute right-6 top-7 bg-linear-to-tl from-[#191919] to-[#161616] rounded-xl w-50 flex flex-col justify-center items-center h-10 py-6"
+          className="absolute right-10 top-9 bg-[#191919] rounded-xl w-50 flex flex-col justify-center items-center h-10 py-6"
           ref={onNotificationMenuRef}
         >
           <button
