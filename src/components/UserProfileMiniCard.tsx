@@ -5,16 +5,20 @@ import UserProfileHeader from "./UserProfileHeader";
 
 function UserProfileMiniCard({
   user_name,
+  cardPlacement,
   onCloseMiniProfileCard,
 }: {
   user_name: string;
+  cardPlacement: "below" | "above";
   onCloseMiniProfileCard: () => void;
 }) {
   const { mainUserProfile, userProfile } = useUserProfile(user_name);
   const { isFollowing, follow, unFollow } = UseFollowProvider();
 
   return (
-    <div className="w-73  max-h-70 min-h-40 animate-[fadeIn_400ms_ease] absolute top-6 -left-6 z-10 bg-linear-to-tl from-[#111] to-[#151515] border rounded-2xl border-[#333] p-5">
+    <div
+      className={`w-73 max-h-70 min-h-40 animate-[fadeIn_400ms_ease] absolute ${cardPlacement === "above" ? "bottom-[55%] mb-2" : "top-full"} -left-6 z-10 bg-linear-to-tl from-[#111] to-[#151515] border rounded-2xl border-[#333] p-5`}
+    >
       {!userProfile ? (
         <div className="w-full h-full mt-6 flex flex-col justify-center items-center">
           <svg
