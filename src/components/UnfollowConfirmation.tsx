@@ -46,7 +46,7 @@ function UnfollowConfirmation({
             className="h-14 mr-2 w-14 @xs:h-20 @xs:w-20 rounded-full items-bottom my-2"
           />
           <p className=" text-center text-sm">
-            ¿Quieres dejar de seguir a {user_name}?
+            ¿Do you want to stop following {user_name}?
           </p>
           {error && (
             <p className="text-sm text-red-500 font-bold h-10">
@@ -64,7 +64,7 @@ function UnfollowConfirmation({
               onCancel();
             }}
           >
-            Cancelar
+            Cancel
           </button>
           <button
             disabled={loading}
@@ -74,7 +74,7 @@ function UnfollowConfirmation({
               handleOnConfirm(e);
             }}
           >
-            {loading ? <Spinner /> : <p>Dejar de seguir</p>}
+            {loading ? <Spinner /> : <p>Unfollow</p>}
           </button>
         </div>
       </div>

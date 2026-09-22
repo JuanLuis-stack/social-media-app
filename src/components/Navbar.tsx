@@ -24,7 +24,7 @@ function Navbar() {
     },
     {
       path: "special",
-      name: "Nuevo Post",
+      name: "New Post",
       url: "M11 17v4h2v-8h8v-2h-8V3h-2v8H3v2h8z",
     },
     {
@@ -34,7 +34,7 @@ function Navbar() {
     },
     {
       path: `/activity/${notifications.type}`,
-      name: "Actividad",
+      name: "Activity",
       url: "M11.29 20.69c.2.2.45.29.71.29s.51-.1.71-.29l7.5-7.5c2.35-2.35 2.35-6.05 0-8.41-2.29-2.29-5.84-2.35-8.21-.2-2.36-2.15-5.91-2.09-8.21.2-2.35 2.36-2.35 6.06 0 8.41z",
     },
   ];

@@ -22,10 +22,10 @@ function FollowCard({
     <Overlay closerFunction={onUnVisibleFollowCard}>
       <div className="w-96 max-h-120 min-h-40 animate-[fadeIn_250ms_ease] bg-linear-to-tr from-[#111] via-[#191919] to-[#111] border-t border-l rounded-2xl border-l-white/25 border-t-white/25 p-6">
         <UserProfileHeader user={userProfile}></UserProfileHeader>
-        <div className="w-full flex pt-1">
+        <div className="w-full flex pt-3">
           {mainUserProfile ? (
             <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-full text-white text-sm font-semibold cursor-pointer hover:opacity-70">
-              ver mi perfil
+              View my profile
             </button>
           ) : (
             <div className="w-full">

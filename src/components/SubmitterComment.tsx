@@ -77,7 +77,7 @@ function SubmitterComment({ post, reloadComments }: SubmitterCommentsProps) {
         >
           <textarea
             ref={textareaRef}
-            placeholder="Qué quieres comentar?"
+            placeholder="What would you like to comment on?"
             value={message.content}
             onChange={handleChange}
             onKeyDown={handleKeyDown}

@@ -168,9 +168,9 @@ function LoadPostCard() {
             onClick={closeSubmitPost}
             className="absolute left-2 font-semibold cursor-pointer text-gray-400 hover:text-white rounded-md duration-150 over w-18 truncate text-sm"
           >
-            Cancelar
+            Cancel
           </button>
-          <p className="font-bold text-sm">Nuevo Post</p>
+          <p className="font-bold text-sm">New Post</p>
         </header>
         <div className="relative flex-1 overflow-y-auto custom-scrollbar px-2">
           <div className="flex flex-1 p-2 flex-wrap">
@@ -184,7 +184,7 @@ function LoadPostCard() {
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row justify-between px-2 py-2">
               <label htmlFor="title" className="w-20 pb-2 md:pr-2 text-sm">
-                Titulo:
+                Title:
               </label>
               <textarea
                 ref={titleRef}
@@ -200,7 +200,7 @@ function LoadPostCard() {
             </div>
             <div className="flex flex-col md:flex-row justify-between px-2">
               <label htmlFor="content" className="w-20 pb-2 md:pr-1 text-sm">
-                contexto:
+                context:
               </label>
               <textarea
                 ref={contentRef}
@@ -295,7 +295,7 @@ function LoadPostCard() {
             <p
               className={`font-semibold pl-2 ${error ? "text-red-500" : "text-transparent"} duration-500`}
             >
-              Debes de llenar todos campos
+              You must fill in all the fields.
             </p>
           </div>
           <button
@@ -307,7 +307,7 @@ function LoadPostCard() {
             className={`bg-[#777] hover:bg-[#eee] md:hover:bg text-black/60 md:bg-black/10 md:hover:bg-black/30 md:text-white/70 md:border-[1.5px] md:border-white/25 cursor-pointer font-semibold duration-150 rounded-xl px-4 text-sm 
             ${animate === "submitPost" && "animate-[spanIn_400ms_ease]"}`}
           >
-            Publicar
+            Post
           </button>
         </footer>
       </div>

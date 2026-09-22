@@ -24,16 +24,18 @@ function UserProfileHeader({ user }: UserProfileHeader) {
           />
         </div>
       </div>
-      <div className="w-full">
-        <p className="font-normal text-white text-sm truncate @xs:whitespace-normal @xs:pb-3">
-          {user.presentation}
-        </p>
-      </div>
+      {user.presentation && (
+        <div className="w-full">
+          <p className="font-normal text-white text-sm truncate @xs:whitespace-normal @xs:pb-3">
+            {user.presentation}
+          </p>
+        </div>
+      )}
       <div>
         <div>
           <p className="font-normal text-gray-400 text-sm text-start">
             {user.followers}
-            {Number(user.followers) === 1 ? " seguidor" : " seguidores"}
+            {Number(user.followers) === 1 ? " follower" : " followers"}
           </p>
         </div>
       </div>

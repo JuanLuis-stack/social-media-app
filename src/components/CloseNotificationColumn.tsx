@@ -54,7 +54,7 @@ function CloseNotificationColumn() {
               removeColumn("activity");
             }}
           >
-            <p>Suprimir columna</p>
+            <p>Delete column</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

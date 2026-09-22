@@ -44,7 +44,7 @@ function NotificationMenu({ id, is_read }: { id: number; is_read: boolean }) {
                 setMenuVisible(false);
               }}
             >
-              <p className=" font-semibold">Marcar como leido</p>
+              <p className=" font-semibold">Mark as read</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -66,7 +66,7 @@ function NotificationMenu({ id, is_read }: { id: number; is_read: boolean }) {
               setMenuVisible(false);
             }}
           >
-            <p className="text-red-500 font-bold">Eliminar notificacion</p>
+            <p className="text-red-500 font-bold">Delete notification</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

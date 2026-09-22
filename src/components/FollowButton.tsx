@@ -47,7 +47,7 @@ function FollowButton({
           setUnFollowCardVisible(true);
         }}
       >
-        siguiendo
+        Following
       </button>
       {unFollowCardVisible && (
         <UnfollowConfirmation
@@ -79,7 +79,7 @@ function FollowButton({
         ) : loading ? (
           <Spinner />
         ) : (
-          <p>seguir</p>
+          <p>Follow</p>
         )}
       </button>
     </>

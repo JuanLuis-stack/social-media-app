@@ -62,7 +62,7 @@ function ProfileColumn({ user_name }: { user_name: string | undefined }) {
       <div className="w-full flex justify-center gap-1 px-5">
         {mainUserProfile ? (
           <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70">
-            Editar perfil
+            Edit Profile
           </button>
         ) : (
           <>
@@ -73,7 +73,7 @@ function ProfileColumn({ user_name }: { user_name: string | undefined }) {
               onUnFollow={() => unFollow(user_name)}
             ></FollowButton>
             <button className="border border-white/30 rounded-md px-2 py-1.5 flex justify-center items-center w-[92%] text-white text-sm font-semibold cursor-pointer hover:opacity-70 ">
-              Enviar mensage
+              Send message
             </button>
           </>
         )}
@@ -81,7 +81,7 @@ function ProfileColumn({ user_name }: { user_name: string | undefined }) {
       <div>
         <div className="w-full pt-6 flex justify-center items-center border-b border-white/30">
           <p className="text-white pb-2 px-4 border-b font-semibold h-full">
-            Publicaciones
+            Publications
           </p>
         </div>
         {mainUserProfile && <SubmitterPostCard></SubmitterPostCard>}

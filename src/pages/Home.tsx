@@ -43,13 +43,13 @@ function Home() {
                   <GoBackArrow
                     name={
                       currentHistory.type === "post"
-                        ? "Publicacion"
+                        ? "Publication"
                         : currentHistory.user_name
                     }
                   ></GoBackArrow>
                 ) : (
                   <p className="font-semibold text-xl text-white cursor-pointer">
-                    Para ti
+                    For you
                   </p>
                 )}
               </div>
@@ -83,14 +83,14 @@ function Home() {
                   <GoBackArrow
                     name={
                       secondHistory.type === "post"
-                        ? "Publicacion"
+                        ? "Publication"
                         : secondHistory.user_name
                     }
                   ></GoBackArrow>
                 ) : (
                   <div className="hidden md:flex items-center h-[10%] pt-3 pl-2">
                     <p className="font-semibold text-xl text-white cursor-pointer">
-                      Para ti
+                      Activity
                     </p>
                     <NotificationsTypeMenu></NotificationsTypeMenu>
                   </div>
