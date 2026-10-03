@@ -3,7 +3,7 @@ import type {
   Column,
   ColumnId,
   NavigationHistory,
-} from "../Schemas/ColumnSchema";
+} from "../../../shared/Schemas/ColumnSchema";
 
 type ColumnNavigationContextType = {
   columns: (Column | null)[];

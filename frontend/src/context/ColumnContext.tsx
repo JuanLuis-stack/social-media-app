@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { UseColumnNavigation } from "./ColumnNavigationContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import type { ColumnId } from "../Schemas/ColumnSchema";
+import type { ColumnId } from "../../../shared/Schemas/ColumnSchema";
 
 type ColumnContextType = {
   columnId: ColumnId;

@@ -1,4 +1,4 @@
-import type { CommentsProp } from "../Schemas/commentSchema";
+import type { CommentsProp } from "../../../shared/Schemas/commentSchema";
 import setTimeAgo from "../utils/setTimeAgo";
 import UserName from "./UserName";
 

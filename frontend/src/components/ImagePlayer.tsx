@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import type { Post } from "../Schemas/postSchema";
+import type { Post } from "../../../shared/Schemas/postSchema";
 import { UseAnimation } from "../context/AnimationContext";
 
 function ImagePlayer({ post }: { post: Post }) {

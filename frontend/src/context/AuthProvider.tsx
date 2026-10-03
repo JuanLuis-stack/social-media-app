@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { AuthContext } from "./AuthContext";
-import type { UserRetrived } from "../Schemas/userSchema";
+import type { UserRetrived } from "../../../shared/Schemas/userSchema";
 
 type AuthProviderProps = {
   children: ReactNode;

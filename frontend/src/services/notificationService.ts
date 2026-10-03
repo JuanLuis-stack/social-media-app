@@ -1,4 +1,4 @@
-import type { Notification } from "../Schemas/notificationsSchema";
+import type { Notification } from "../../../shared/Schemas/notificationsSchema";
 import { api } from "./apiService";
 
 export async function getUserNotifications(token: string) {

@@ -3,7 +3,7 @@ import {
   retrieveNotifications,
   type Notification,
   type Notifications,
-} from "../Schemas/notificationsSchema";
+} from "../../../shared/Schemas/notificationsSchema";
 import {
   deleteNotificationById,
   getUnreadUserNotifications,

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { userRetrivedByUserNameSchema, type User } from "../Schemas/userSchema";
+import {
+  userRetrivedByUserNameSchema,
+  type User,
+} from "../../../shared/Schemas/userSchema";
 import { getUserData } from "../services/userService";
 import { useAuth } from "../context/AuthContext";
 

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { followUser, unFollowUser } from "../services/userService";
-import { followsRetrievedSchema } from "../Schemas/followsSchema";
+import { followsRetrievedSchema } from "../../../shared/Schemas/followsSchema";
 import { getUserFollowers } from "../services/followService";
 
 const FollowContext = createContext<{
