@@ -1,5 +1,5 @@
 import type React from "react";
-import type { Post } from "../Schemas/postSchema";
+import type { Post } from "../../../shared/Schemas/postSchema";
 import { UseAnimation } from "../context/AnimationContext";
 import { UsePostContext } from "../context/PostContext";
 

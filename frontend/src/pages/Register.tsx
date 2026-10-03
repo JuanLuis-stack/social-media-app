@@ -4,7 +4,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { userRegister } from "../services/authService";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { userRetrivedSchema } from "../Schemas/userSchema";
+import { userRetrivedSchema } from "../../../shared/Schemas/userSchema";
 import registerVideo from "../media/loginTexture.mp4";
 
 type logUserType = {

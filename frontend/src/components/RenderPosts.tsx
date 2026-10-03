@@ -1,6 +1,6 @@
 // RenderPosts.tsx
 
-import type { Posts } from "../Schemas/postSchema";
+import type { Posts } from "../../../shared/Schemas/postSchema";
 import PostCard from "./PostCard";
 
 type RenderPostsType = {

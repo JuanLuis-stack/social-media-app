@@ -1,7 +1,7 @@
 // AuthContext.tsx
 
 import React, { createContext, useContext } from "react";
-import type { UserRetrived } from "../Schemas/userSchema";
+import type { UserRetrived } from "../../../shared/Schemas/userSchema";
 
 export type AuthContextType = {
   loggedUser: UserRetrived | null;

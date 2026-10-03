@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import type { Post } from "../Schemas/postSchema";
+import type { Post } from "../../../shared/Schemas/postSchema";
 import setTimeAgo from "../utils/setTimeAgo";
 import VideoPlayer from "./VideoPlayer";
 import ImagePlayer from "./ImagePlayer";

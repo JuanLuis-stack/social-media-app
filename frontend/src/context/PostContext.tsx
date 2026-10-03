@@ -4,7 +4,7 @@ import {
   postsRetrivedSchema,
   type Post,
   type Posts,
-} from "../Schemas/postSchema";
+} from "../../../shared/Schemas/postSchema";
 import { useAuth } from "./AuthContext";
 import {
   getComments,
@@ -13,8 +13,11 @@ import {
   getPostsByUserName,
   likePost,
 } from "../services/postsService";
-import { renderCommentsSchema, type Comments } from "../Schemas/commentSchema";
-import { likeSchema } from "../Schemas/likeSchema";
+import {
+  renderCommentsSchema,
+  type Comments,
+} from "../../../shared/Schemas/commentSchema";
+import { likeSchema } from "../../../shared/Schemas/likeSchema";
 
 type PostContextType = {
   posts: Posts | null;

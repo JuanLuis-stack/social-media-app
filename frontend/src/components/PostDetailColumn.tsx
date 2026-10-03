@@ -5,8 +5,8 @@ import RenderComments from "./RenderComments";
 import ScrollerContainer from "./ScrollerContainer";
 import Spinner from "./Spinner";
 import SubmitterComment from "./SubmitterComment";
-import type { Post } from "../Schemas/postSchema";
-import type { Comments } from "../Schemas/commentSchema";
+import type { Post } from "../../../shared/Schemas/postSchema";
+import type { Comments } from "../../../shared/Schemas/commentSchema";
 
 function PostDetailColumn({ id }: { id: string }) {
   const { getPostById, getCommentsByUserId } = UsePostContext();

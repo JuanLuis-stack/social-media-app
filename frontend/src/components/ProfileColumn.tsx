@@ -7,7 +7,7 @@ import RenderPosts from "./RenderPosts";
 import ScrollerContainer from "./ScrollerContainer";
 import SubmitterPostCard from "./SubmitterPostCard";
 import UserProfileHeader from "./UserProfileHeader";
-import type { Posts } from "../Schemas/postSchema";
+import type { Posts } from "../../../shared/Schemas/postSchema";
 import { Link } from "react-router-dom";
 
 function ProfileColumn({ user_name }: { user_name: string | undefined }) {

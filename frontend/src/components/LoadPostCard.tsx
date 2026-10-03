@@ -2,7 +2,10 @@ import type React from "react";
 import Overlay from "./Overlay";
 import { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { createPostSchema, type SubmitPostType } from "../Schemas/postSchema";
+import {
+  createPostSchema,
+  type SubmitPostType,
+} from "../../../shared/Schemas/postSchema";
 import { submitPost } from "../services/postsService";
 import { UseAnimation } from "../context/AnimationContext";
 import { UsePostContext } from "../context/PostContext";

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { type Notification } from "../Schemas/notificationsSchema";
+import { type Notification } from "../../../shared/Schemas/notificationsSchema";
 import { getUserById } from "../services/userService";
 import { useAuth } from "../context/AuthContext";
-import { userRetrivedByUserNameSchema, type User } from "../Schemas/userSchema";
+import {
+  userRetrivedByUserNameSchema,
+  type User,
+} from "../../../shared/Schemas/userSchema";
 import UserName from "./UserName";
 import setTimeAgo from "../utils/setTimeAgo";
-import { type Post } from "../Schemas/postSchema";
+import { type Post } from "../../../shared/Schemas/postSchema";
 import { UsePostContext } from "../context/PostContext";
 import ActionPostButtons from "./ActionPostButtons";
 import NotificationMenu from "./NotificationMenu";

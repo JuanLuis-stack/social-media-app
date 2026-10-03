@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { submitComment } from "../services/postsService";
-import type { Post } from "../Schemas/postSchema";
+import type { Post } from "../../../shared/Schemas/postSchema";
 import { useAuth } from "../context/AuthContext";
 import { UseAnimation } from "../context/AnimationContext";
 

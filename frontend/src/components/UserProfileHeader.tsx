@@ -1,4 +1,4 @@
-import type { User } from "../Schemas/userSchema";
+import type { User } from "../../../shared/Schemas/userSchema";
 
 type UserProfileHeader = { user?: User | null };
 
